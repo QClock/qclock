@@ -1,0 +1,172 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: QClock API
+
+# Describe your paths here
+paths:
+  # This is a path endpoint. Change it.
+  /time:
+    get:
+      description: |
+        Gets time
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Timestamp
+            type: number
+    put:
+      description: |
+        Sets time
+      parameters:
+        -
+          name: timestamp
+          in: query
+          description: Timestamp
+          required: true
+          type: number
+      responses:
+        200:
+          description: Successful operation
+  
+  /timezone:
+    get:
+      description: |
+          Gets timezone offset in hours
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Timezone offset
+            type: number  
+    put:
+      description: |
+        Sets time
+      parameters:
+        -
+          name: timezone
+          in: query
+          description: Timezone offset
+          required: true
+          type: number
+      responses:
+        200:
+          description: Successful operation
+          
+  /network:
+    get:
+      description: |
+        Get network configuration
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Network config
+            type: string
+    put:
+      description: |
+        Sets network configuration
+      parameters:
+        -
+          name: ssid
+          in: formData
+          description: AP SSID
+          required: true
+          type: string
+        -
+          name: password
+          in: formData
+          description: AP password
+          required: true
+          type: string          
+      responses:
+        200:
+          description: Successful operation
+  
+  /clockface/color:
+    get:
+      description: |
+        Get current colors
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Color
+            type: object
+    put:
+      description: |
+        Sets color
+      parameters:
+        -
+          name: inner
+          in: query
+          description: Inner Color
+          required: false
+          type: string
+        -
+          name: outer
+          in: query
+          description: Outer Color
+          required: false
+          type: string  
+      responses:
+        200:
+          description: Successful operation        
+          
+  /clockface/type:
+    get:
+      description: |
+        Get clockface type
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Clockface type
+            type: string
+    put:
+      description: |
+        Sets clockface type
+      parameters:
+        -
+          name: type
+          in: query
+          description: Clockface type
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation
+          
+  /animations/list:
+    get:
+      description: |
+        Get animation list
+      responses:
+        200:
+          description: Successful response
+          schema:
+            title: Animation list
+            type: array
+            items:
+              type: string
+  
+  /animations/run:
+    put:
+      description: |
+        Sets clockface type
+      parameters:
+        -
+          name: type
+          in: query
+          description: Animation type
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successful operation

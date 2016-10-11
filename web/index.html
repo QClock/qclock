@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <title>QClock</title>
+    <meta name="description" content="QClock settings" />
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href='/static/material.min.css' rel='stylesheet' type='text/css'>
+
+    <style type="text/css">
+        .mdl-textfield.time-hours,
+        .mdl-textfield.time-minutes {
+            width: 80px;
+        }
+
+        h5.time-delimiter {
+            width: 30px;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .color-picker input {
+
+        }
+    </style>
+</head>
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
+
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">QTime</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/datetime">Time</a>
+                <a class="mdl-navigation__link" href="/clockface">Clockface</a>
+                <a class="mdl-navigation__link" href="/network">Network</a>
+                <a class="mdl-navigation__link" href="/advanced">Advanced</a>
+            </nav>
+        </div>
+
+        <main class="mdl-layout__content mdl-color--grey-100">
+
+            <div class="page-content hidden" data-page="datetime">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h2>Time</h2>
+                    </div>
+                </div>
+
+                <form action="#">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-hours">
+                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="Hours">
+                            <label class="mdl-textfield__label" for="Hours">Hours</label>
+                        </div>
+                        <h5 class="time-delimiter">:</h5>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-minutes">
+                            <input class="mdl-textfield__input" type="number" min="0" max="59" id="Minutes">
+                            <label class="mdl-textfield__label" for="Minutes">Minutes</label>
+                        </div>
+
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="number" id="TimeZoneOffset">
+                            <label class="mdl-textfield__label" for="TimeZoneOffset">Timezone offset in minutes</label>
+                        </div>
+
+                    </div>
+                </div>
+
+                </form>
+
+            </div>
+
+            <div class="page-content hidden" data-page="clockface">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h2>Clockface</h2>
+                    </div>
+                </div>
+
+                <form action="#">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+<!--
+
+    type
+        outer color
+        inner color
+        dim toggle
+        dim value
+        dim start
+        dim end
+
+-->
+                        <h4>Colors & theme</h4>
+
+                        <div class="mdl-textfield mdl-js-textfield color-picker mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input jscolor {onFineChange:'outerFineChange(this)'}" type="text" id="OuterColor">
+                            <label class="mdl-textfield__label" for="OuterColor">Outer Color</label>
+                        </div>
+
+                        <div class="mdl-textfield mdl-js-textfield color-picker mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input jscolor {onFineChange:'innerFineChange(this)'}" type="text" id="InnerColor">
+                            <label class="mdl-textfield__label" for="InnerColor">Inner Color</label>
+                        </div>
+
+                        <h4>Night mode</h4>
+                        <div class="mdl-textfield">
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="DimToggle">
+                                <input type="checkbox" id="DimToggle" class="mdl-switch__input" checked>
+                                <span class="mdl-switch__label">Dim light level at night</span>
+                            </label>
+                        </div>
+
+                        <div><label>Dim level</label></div>
+
+                        <div class="mdl-textfield">
+                            <!-- Slider with Starting Value -->
+                            <input class="mdl-slider mdl-js-slider" id="DimLevel" type="range"
+                                min="0" max="100" value="25" tabindex="0">
+                        </div>
+
+                        <div><label>Dim start</label></div>
+
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-hours">
+                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="DimStartHour">
+                            <label class="mdl-textfield__label" for="DimStartHour">Hour</label>
+                        </div>
+
+                        <div><label>Dim end</label></div>
+
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-hours">
+                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="DimEndHour">
+                            <label class="mdl-textfield__label" for="DimEndHour">Hour</label>
+                        </div>
+
+                        <div>
+                            <button class="mdl-button mdl-js-button mdl-button--raised" id="TogglePreview">
+                                Preview Night Mode
+                            </button>
+                            <div class="mdl-tooltip" data-mdl-for="TogglePreview">
+                                Pressing the button will enable night mode preview for 10 seconds
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+
+            </div>
+
+            <div class="page-content hidden" data-page="network">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h2>Network</h2>
+                    </div>
+                </div>
+
+                <form action="#">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--4-col">
+
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="SSID">
+                            <label class="mdl-textfield__label" for="SSID">SSID</label>
+                        </div>
+
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="Password">
+                            <label class="mdl-textfield__label" for="Password">Password</label>
+                        </div>
+                    </div>
+                </div>
+
+                </form>
+
+            </div>
+
+
+
+
+
+        </main>
+
+    </div>
+
+    <div id="Notification" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text message"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+
+
+    <script type="text/javascript" src="/static/material.min.js"></script>
+    <script type="text/javascript" src="/static/jscolor.min.js"></script>
+    <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/qclock/Router.js"></script>
+    <script type="text/javascript" src="/static/qclock/Page.js"></script>
+    <script type="text/javascript" src="/static/qclock/DateTimePage.js"></script>
+    <script type="text/javascript" src="/static/qclock/ClockFacePage.js"></script>
+    <script type="text/javascript" src="/static/index.js"></script>
+</body>
+</html>

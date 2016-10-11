@@ -1,0 +1,46 @@
+{
+  "name": "qclock",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm run build:clean && npm run t2:erase; npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:push",
+    "run:local": "npm run build:clean && npm run build:device && npm run config && npm run copy && cd build/; export QTEST=1;node index.js",
+    "run:device": "npm run build:clean && npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:run",
+    "cleanup": "rm -rf build; mkdir build",
+    "build:clean": "rm -rf build/web",
+    "t2:erase": "t2 erase",
+    "t2:push": "t2 push .",
+    "t2:run": "t2 run .",
+    "copy": "cp .tesselinclude build/; cp -RLf web build/",
+    "config": "node setconfig.js",
+    "build:device": "babel src --out-dir build",
+    "install:prod": "npm i --only=prod"
+  },
+  "repository": "https://github.com/necccc/QTime.git",
+  "keywords": [
+    "Tessel"
+  ],
+  "dependencies": {
+    "body": "^5.1.0",
+    "tessel2-fadecandy": "^1.0.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-uglify": "^2.0.0",
+    "t2-cli": "latest",
+    "ws": "^1.1.1"
+  },
+  "license": "MIT",
+  "readme": "",
+  "qclock": {
+    "network": {
+      "ssid": "QCLOCK"
+    },
+    "display": {},
+    "time": 0
+  }
+}
