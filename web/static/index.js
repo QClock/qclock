@@ -7,7 +7,7 @@ new Router({
     datetime: new DateTimePage(),
     clockface: new ClockFacePage(),
     network: '',
-    animations: '',
+    animations: new AnimationsPage(),
     advanced: '',
 })
 

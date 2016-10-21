@@ -1,12 +1,13 @@
 
 const animations = require('../../animations')
 
-
 module.exports = function (request, response) {
+
+    let { method } = request;
 
     if (method === 'GET') {
         response.end(JSON.stringify({
-            animations: Object.keys(animations).map((anim)=>{
+            animations: Object.keys(animations).map((anim) => {
                 return {
                     label: anim,
                     name: animations[anim].name
@@ -15,23 +16,17 @@ module.exports = function (request, response) {
         }))
     }
 
-
     if (method === 'PUT') {
         this.getRequestBody(request, (err, body) => {
 
-            console.log(body.animation)
+            this.tick.pause()
 
-
-            //this.tick.pause()
-
-            animations[body.animation].run(this.npx, ()=>{
+            animations[body.run].run(this, () => {
                 this.tick.resume()
             })
 
             response.end('ok')
-
         })
     }
-
 
 }

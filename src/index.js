@@ -67,18 +67,6 @@ function next () {
     });
 }
 
-
-
-if (!config.TESSEL) {
-    var WebSocketServer = require('ws').Server,
-        wss = new WebSocketServer({ port: 8080 });
-
-    wss.on('connection', function connection(ws) {
-        connections.push(ws)
-        next()
-    });
-}
-
 if (config.USE_ADMIN) {
     network.on('ready', server.start.bind(server));
     //network.on('error', server.disconnect.bind(server));

@@ -32,6 +32,7 @@ const HttpServer = require('http').Server
 const fs = require('fs');
 const path = require('path');
 const Url = require('url')
+const ws = require('ws')
 
 const paths = [
     'datetime',
@@ -53,11 +54,14 @@ module.exports = class Server extends HttpServer {
 
         this.opened = false
         this.__cache = {}
+        this.wsConnections = new Set()
 
         this.on('request', this.__onRequest.bind(this))
         this.on('clientError', this.__onError.bind(this))
 
         this.apiRoutes = require('./api')
+
+        this.receivePauseTimeout = 0
     }
 
     start (networkConnection) {
@@ -70,10 +74,39 @@ module.exports = class Server extends HttpServer {
 
         this.listen(this.config.SERVER_PORT, this.__networkConnection.ip)
         this.opened = true
+
+        var WebSocketServer = ws.Server,
+            wss = new WebSocketServer({ port: 8899 });
+
+        wss.on('connection', (ws) => {
+            ws.on('close', this.onWsClose(ws))
+            ws.on('message', (buf)=>{
+
+                clearTimeout(this.receivePauseTimeout)
+                this.tick.pause()
+                var ui8 = new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
+                this.npx.send(ui8)
+                this.setDisplayBuffer(buf)
+
+                this.receivePauseTimeout = setTimeout(()=>{this.tick.resume()}, 1000)
+            })
+            this.wsConnections.add(ws)
+        });
+    }
+
+    onWsClose (ws) {
+        return ()=>{
+            this.wsConnections.delete(ws)
+        }
     }
 
     disconnect () {
         if (!this.opened) return;
+
+        for (let con of this.wsConnections) {
+            con.terminate()
+            this.wsConnections.delete(con)
+        }
 
         this.__networkConnection = {};
         this.opened = false;
@@ -82,6 +115,11 @@ module.exports = class Server extends HttpServer {
 
     setDisplayBuffer (buf) {
         this.displayBuffer = buf
+
+
+        this.wsConnections.forEach((con)=>{
+           if (con.readyState === 1) con.send(this.displayBuffer)
+        })
     }
 
     onRpc (request, response) {

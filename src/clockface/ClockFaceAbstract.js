@@ -1,6 +1,7 @@
 const dim = require('../lib/util/dim')
 
 module.exports = class ClockFaceAbstract {
+
     constructor (config) {
         this.config = config
     }
