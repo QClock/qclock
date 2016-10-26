@@ -55,7 +55,7 @@ function getTime () {
 
 function next () {
 
-   clockface.getBuffer(getTime(), function (buf) {
+   clockface.read(getTime(), function (buf) {
 
         if (config.USE_ADMIN) {
             server.setDisplayBuffer(buf)

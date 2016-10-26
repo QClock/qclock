@@ -6,14 +6,35 @@ module.exports = class ClockFaceAbstract {
         this.config = config
     }
 
-    getColor (segment, time) {
-        let color = segment == 'outer' ? this.config.OUTER_COLOR : this.config.INNER_COLOR;
+    read (date, callback) {
+    	this.date = date
+		this.getBuffer(callback)
+	}
+
+	getBuffer (next) {
+		return next(Buffer.concat([
+			this.getOuterPixels(),
+			this.getStubPixels(),
+			this.getInnerPixels()
+		]))
+	}
+
+	setDefaults (fields) {
+		Object.keys(fields).forEach((field) => {
+			if (!this.config.CLOCKFACE[field]) {
+				this.config.CLOCKFACE[field] = fields[field].value
+			}
+		})
+	}
+
+    getColor (segment) {
+        let color = this.config.CLOCKFACE[segment]
 
         if (this.config.DIM_PREVIEW ||
             (
                 this.config.DIM_ENABLED &&
                 this.config.DIM_FROM && this.config.DIM_TO &&
-                (time.getHours() > this.config.DIM_FROM || time.getHours() < this.config.DIM_TO)
+                (this.date.getHours() > this.config.DIM_FROM || this.date.getHours() < this.config.DIM_TO)
             )
         ) {
             color = dim(this.config.DIM_LEVEL, color)
@@ -23,9 +44,9 @@ module.exports = class ClockFaceAbstract {
     }
 
 
-    getMinutePixel (time) {
+    getMinutePixel () {
         // get the actual pixel that closest to the current minute
-        let actual = Math.round(( this.config.OUTER / 60 ) * time.getMinutes() )
+        let actual = Math.round(( this.config.OUTER / 60 ) * this.date.getMinutes() )
 
         // the 0 is the 28th index on OUTER
         actual = actual + 29
@@ -37,9 +58,9 @@ module.exports = class ClockFaceAbstract {
         return actual
     }
 
-    getHourPixel (time) {
-        let hours = time.getHours()
-        let minutes = time.getMinutes()
+    getHourPixel () {
+        let hours = this.date.getHours()
+        let minutes = this.date.getMinutes()
         let actual = 0
 
         // by default we use 12-hour format

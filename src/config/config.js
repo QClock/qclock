@@ -17,14 +17,13 @@ module.exports = {
     SKIP_FADECANDY: skip_facedandy,
 
     TESSEL: tessel,
-    TESSEL_VERSION: 2,
     SERVER_PORT: port,
 
     INTERVAL: 1000,
 
     NTP_OFFSET: 0,
     TIMEZONE_OFFSET: 2,
-    HW_LAG: 70,
+    HW_LAG: 0,
 
     OUTER: 58,
     INNER: 56,
@@ -54,7 +53,7 @@ module.exports = {
 
     DIM_PREVIEW: false,
 
-    DEMO_COUNTER: 0,
+    NETWORK: packagejson.qclock.network,
 
-    NETWORK: packagejson.qclock.network
+    CLOCKFACE: {}
 }

@@ -169,33 +169,18 @@
 
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--4-col">
-<!--
 
-    type
-        outer color
-        inner color
-        dim toggle
-        dim value
-        dim start
-        dim end
-
--->
                         <h4>Colors & theme</h4>
 
-                        <div class="mdl-textfield mdl-js-textfield color-picker mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input jscolor {onFineChange:'outerFineChange(this)'}" type="text" id="OuterColor">
-                            <label class="mdl-textfield__label" for="OuterColor">Outer Color</label>
-                        </div>
+                        <div class="clockface-settings">
 
-                        <div class="mdl-textfield mdl-js-textfield color-picker mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input jscolor {onFineChange:'innerFineChange(this)'}" type="text" id="InnerColor">
-                            <label class="mdl-textfield__label" for="InnerColor">Inner Color</label>
                         </div>
 
                         <h4>Night mode</h4>
+
                         <div class="mdl-textfield">
-                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="DimToggle">
-                                <input type="checkbox" id="DimToggle" class="mdl-switch__input" checked>
+                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="dimEnabled">
+                                <input type="checkbox" id="dimEnabled" class="mdl-switch__input" checked>
                                 <span class="mdl-switch__label">Dim light level at night</span>
                             </label>
                         </div>
@@ -204,22 +189,22 @@
 
                         <div class="mdl-textfield">
                             <!-- Slider with Starting Value -->
-                            <input class="mdl-slider mdl-js-slider" id="DimLevel" type="range"
+                            <input class="mdl-slider mdl-js-slider" id="dimLevel" type="range"
                                 min="0" max="100" value="25" tabindex="0">
                         </div>
 
                         <div><label>Dim start</label></div>
 
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-hours">
-                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="DimStartHour">
-                            <label class="mdl-textfield__label" for="DimStartHour">Hour</label>
+                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="dimFrom">
+                            <label class="mdl-textfield__label" for="dimFrom">Hour</label>
                         </div>
 
                         <div><label>Dim end</label></div>
 
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label time-hours">
-                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="DimEndHour">
-                            <label class="mdl-textfield__label" for="DimEndHour">Hour</label>
+                            <input class="mdl-textfield__input" type="number" min="0" max="23" id="dimTo">
+                            <label class="mdl-textfield__label" for="dimTo">Hour</label>
                         </div>
 
                         <div>
