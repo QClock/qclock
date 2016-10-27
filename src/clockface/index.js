@@ -4,12 +4,13 @@ class Clockface {
 	constructor () {
 
 		this.clockfaceList = [
-			new (require('./Original'))(config)
+			new (require('./Original'))(config),
+			new (require('./SingleColor'))(config)
 		]
 		// find and load available clockfaces
 		// init one by the config
 
-		console.log('init')
+		this.currentIndex = 0
 	}
 
 	read (date, callback) {
@@ -22,8 +23,17 @@ class Clockface {
 		return this.clockfaceList
 	}
 
+	set current (name) {
+
+		this.currentIndex = this.clockfaceList.reduce((collect, item, index) => {
+			if (item.name === name) return index;
+
+			return collect;
+		}, 0)
+	}
+
 	get current () {
-		return this.clockfaceList[0]
+		return this.clockfaceList[this.currentIndex]
 	}
 }
 

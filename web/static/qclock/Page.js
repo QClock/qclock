@@ -1,13 +1,3 @@
-const availableFields = {
-    color: function (data) {
-            return `
-            <div class="mdl-textfield mdl-js-textfield color-picker mdl-textfield--floating-label">
-                <input class="mdl-textfield__input jscolor {onFineChange:'${data.name}FineChange(this)'}" type="text" id="${data.name}" name="${data.name}">
-                <label class="mdl-textfield__label" for="${data.name}">${data.label}</label>
-                <label class="mdl-textfield__label" for="${data.name}">${data.label}</label>
-            </div>`
-        }
-}
 
 
 class Page {
@@ -21,10 +11,6 @@ class Page {
         return $('[data-page=' + this.page+ ']')
     }
 
-    get availableFields () {
-    	return availableFields;
-	}
-
     getPageData (cb) {
         $.getJSON('/api/' + this.page, cb)
     }
@@ -36,7 +22,7 @@ class Page {
             method: 'PUT',
             data: data,
             dataType: 'json',
-            success: () => {cb()},
+            success: (...args) => {cb(...args)},
             error: (err) => {console.error(err)}
         })
 
@@ -92,22 +78,6 @@ class Page {
     }
 
     onPageData (data) {
-		if (data.clockface) {
-
-			for (let field of Object.keys(data.clockface)) {
-				let fieldObj = data.clockface[field]
-
-				fieldObj.name = field
-
-				if (availableFields[fieldObj.type]) {
-					let elem  = $('.clockface-settings').append(availableFields[fieldObj.type](fieldObj))
-
-					if (fieldObj.type == 'color') {
-						$(`#${field}`)[0].jscolor = new jscolor($(`#${field}`)[0])
-					}
-				}
-			}
-		}
 
 		for (let input of Object.keys(data)) {
 			if (this.container.find(`#${input}`).length) {

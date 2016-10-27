@@ -27,7 +27,13 @@ const getValues = function (server) {
 		dimTo: server.config.DIM_TO
 	}
 
-	return Object.assign(fields, dim, { clockface: clockfaceFields })
+	let clockfaceData = {
+		list: clockfaces.list.map((cf) => cf.name),
+		current: clockfaces.current.name,
+		fields: clockfaceFields
+	}
+
+	return Object.assign(fields, dim, { clockface: clockfaceData })
 
 }
 
@@ -36,8 +42,6 @@ module.exports = function (request, response) {
     let { method } = request;
 
 // in / out : RGB
-	console.log(clockfaces)
-	console.log(clockfaces.current)
 
 
     if (method === 'GET') {
@@ -48,6 +52,17 @@ module.exports = function (request, response) {
 
     if (method === 'PUT') {
         this.getRequestBody(request, (err, body) => {
+
+
+			if (body.clockface) {
+
+				clockfaces.current = body.clockface
+				this.tick.now()
+				response.end(JSON.stringify(getValues(this)))
+
+				return;
+			}
+
 
         	let clockfaceFields = clockfaces.current.fields;
 

@@ -6,6 +6,15 @@ module.exports = class ClockFaceAbstract {
         this.config = config
     }
 
+	get name () {
+		return '-- you should override this --'
+	}
+
+	get fields () {
+		return {}
+	}
+
+
     read (date, callback) {
     	this.date = date
 		this.getBuffer(callback)
