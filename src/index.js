@@ -5,9 +5,9 @@ var config = require('./config/config.js')
 
 
 var NeoPixels = require('./lib/npx.js')
-var OriginalClockFace = require('./clockface/original.js')
 
-var clockface = new OriginalClockFace(config)
+var clockface = require('./clockface')
+
 //var time = require('./clockface/original-spectrum.js')
 //var time = require('./clockface/original-spectrum-fill.js')
 var tick = require('./lib/tick.js')

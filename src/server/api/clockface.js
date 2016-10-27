@@ -1,5 +1,5 @@
 
-var clockfaceObj = require('../../clockface/Original')
+var clockfaces = require('../../clockface')
 
 const rgbToArray = function (rgb) {
     return [0,0,0].map((val,i)=>parseInt(rgb.substr((i % 3) * 2,2),16));
@@ -9,7 +9,7 @@ const toHex = (prev, current) => {let hex = current.toString(16); return prev + 
 
 const getValues = function (server) {
 
-	let clockfaceFields = clockfaceObj.fields;
+	let clockfaceFields = clockfaces.current.fields;
 	let fields = {}
 
 	for (let field of Object.keys(clockfaceFields)) {
@@ -36,7 +36,8 @@ module.exports = function (request, response) {
     let { method } = request;
 
 // in / out : RGB
-
+	console.log(clockfaces)
+	console.log(clockfaces.current)
 
 
     if (method === 'GET') {
@@ -48,7 +49,7 @@ module.exports = function (request, response) {
     if (method === 'PUT') {
         this.getRequestBody(request, (err, body) => {
 
-        	let clockfaceFields = clockfaceObj.fields;
+        	let clockfaceFields = clockfaces.current.fields;
 
 			for (let field of Object.keys(clockfaceFields)) {
 				this.config.CLOCKFACE[field] = rgbToArray(body[field])

@@ -23,7 +23,11 @@ module.exports = class Original extends ClockFaceAbstract {
 		this.setDefaults(fields)
     }
 
-    static get fields () {
+    get name () {
+    	return 'Original'
+	}
+
+    get fields () {
         return fields
     }
 
