@@ -5,7 +5,8 @@ class Clockface {
 
 		this.clockfaceList = [
 			new (require('./Original'))(config),
-			new (require('./SingleColor'))(config)
+			new (require('./SingleColor'))(config),
+			new (require('./SecondLight'))(config)
 		]
 		// find and load available clockfaces
 		// init one by the config

@@ -32,6 +32,7 @@ module.exports = class Original extends ClockFaceAbstract {
     }
 
     getOuterPixels () {
+        let color = this.config.CLOCKFACE[OUTERCOLOR]
         let unitsArray = new Array(this.config.OUTER),
             actual = this.getMinutePixel(),
             index = 0,
@@ -39,7 +40,7 @@ module.exports = class Original extends ClockFaceAbstract {
 
         for (; index < this.config.OUTER ; index++ ) {
             if (index == actual) {
-                buf = new Buffer(this.getColor(OUTERCOLOR))
+                buf = new Buffer(this.getColor(color))
             } else {
                 buf = new Buffer(this.config.NONE_COLOR)
             }
@@ -50,7 +51,7 @@ module.exports = class Original extends ClockFaceAbstract {
     }
 
     getInnerPixels (date) {
-
+        let color = this.config.CLOCKFACE[INNERCOLOR]
         let unitsArray = new Array(this.config.INNER),
             actual = this.getHourPixel(),
             index = 0,
@@ -58,7 +59,7 @@ module.exports = class Original extends ClockFaceAbstract {
 
         for (; index < this.config.INNER; index++ ) {
             if (index == actual) {
-                buf = new Buffer(this.getColor(INNERCOLOR))
+                buf = new Buffer(this.getColor(color))
             } else {
                 buf = new Buffer(this.config.NONE_COLOR)
             }

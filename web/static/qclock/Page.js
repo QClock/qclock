@@ -78,7 +78,7 @@ class Page {
     }
 
     onPageData (data) {
-
+        this.fields = []
 		for (let input of Object.keys(data)) {
 			if (this.container.find(`#${input}`).length) {
 				this.fields.push(`#${input}`)
@@ -86,6 +86,9 @@ class Page {
 			}
 		}
 
+        this.fields.forEach((field) => {
+            this.container.find(field).on('change', (e) => this.onChange(e))
+        })
 
 
 	}

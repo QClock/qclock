@@ -14,7 +14,6 @@ module.exports = class ClockFaceAbstract {
 		return {}
 	}
 
-
     read (date, callback) {
     	this.date = date
 		this.getBuffer(callback)
@@ -36,9 +35,7 @@ module.exports = class ClockFaceAbstract {
 		})
 	}
 
-    getColor (segment) {
-        let color = this.config.CLOCKFACE[segment]
-
+    getColor (color) {
         if (this.config.DIM_PREVIEW ||
             (
                 this.config.DIM_ENABLED &&

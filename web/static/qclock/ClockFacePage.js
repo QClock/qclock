@@ -6,6 +6,14 @@ const availableFields = {
                 <input class="mdl-textfield__input jscolor {onFineChange:'${data.name}FineChange(this)'}" type="text" id="${data.name}" name="${data.name}">
                 <label class="mdl-textfield__label" for="${data.name}">${data.label}</label>
             </div>`
+	},
+	slider: function (data) {
+		return `
+			<div><label>${data.label}</label></div>
+			<div class="mdl-textfield">
+				<input class="mdl-slider mdl-js-slider" id="${data.name}" type="range"
+					min="0" max="100" value="25" tabindex="0">
+			</div>`
 	}
 }
 
@@ -74,9 +82,7 @@ class ClockFacePage extends Page {
 		}
 
 
-		this.fields.forEach((field) => {
-			this.container.find(field).on('change', (e) => this.onChange(e))
-		})
+
 
         super.onPageData(data)
 		this.show()

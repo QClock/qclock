@@ -13,7 +13,7 @@ const getValues = function (server) {
 	let fields = {}
 
 	for (let field of Object.keys(clockfaceFields)) {
-		if (server.config.CLOCKFACE[field]) {
+		if (server.config.CLOCKFACE[field] && clockfaceFields[field].type == 'color') {
 			fields[field] = server.config.CLOCKFACE[field].reduce(toHex, '')
 		} else {
 			fields[field] = clockfaceFields[field].value

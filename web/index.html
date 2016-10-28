@@ -42,7 +42,19 @@
 
         }
 
+        .clockface-chooser h6 {
+            display: inline-block;
+            position:relative;
+        }
 
+        .clockface-chooser h6 span {
+            padding-right: 15px;
+        }
+
+        .current-theme {
+            padding: 0 7px 0 0;
+            white-space: pre;
+        }
 
 
         .pixels {
@@ -172,26 +184,22 @@
 
                         <h4>Colors & theme</h4>
 
+                        <div class="clockface-chooser">
 
-                        <div style="">
+                            <h6>
+                                <span>Current theme:</span>
+                                <strong class="current-theme"></strong>
 
-                            <h6 style="display: inline-block;position:relative;">
-                                <span style="padding-right: 15px;">Current theme:</span>
-                                <strong style="padding: 0 7px 0 0; white-space: pre;" class="current-theme"></strong>
+                                <button id="ClockfaceType"
+                                        class="mdl-button mdl-js-button mdl-button--icon">
+                                    <i class="material-icons">arrow_drop_down_circle</i>
+                                </button>
 
-                            <button id="ClockfaceType"
-                                    class="mdl-button mdl-js-button mdl-button--icon">
-                                <i class="material-icons">arrow_drop_down_circle</i>
-                            </button>
-
-                            <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
-                                for="ClockfaceType">
-
-                            </ul>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    for="ClockfaceType">
+                                </ul>
                             </h6>
                         </div>
-
-
 
                         <div class="clockface-settings">
 

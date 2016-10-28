@@ -1,17 +1,23 @@
 const ClockFaceAbstract = require('./ClockFaceAbstract')
 
 const COLOR = 'color'
+const DESATURATE = 'desaturate'
 
 
 const fields = {
     [COLOR]: {
         'type': 'color',
-        'label': 'Color',
+        'label': 'Colors for both arms',
         'value': [255, 0, 255]
+    },
+    [DESATURATE]: {
+        'type': 'slider',
+        'label': 'Saturation for pair color',
+        'value': 70
     }
 }
 
-module.exports = class Original extends ClockFaceAbstract {
+module.exports = class SecondLight extends ClockFaceAbstract {
 
     constructor (config) {
         super(config)
@@ -19,7 +25,7 @@ module.exports = class Original extends ClockFaceAbstract {
     }
 
     get name () {
-    	return 'Single Color'
+    	return 'Second Light'
 	}
 
     get fields () {
@@ -28,6 +34,7 @@ module.exports = class Original extends ClockFaceAbstract {
 
     getOuterPixels () {
         let color = this.config.CLOCKFACE[COLOR]
+
         let unitsArray = new Array(this.config.OUTER),
             actual = this.getMinutePixel(),
             index = 0,
