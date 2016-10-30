@@ -45,14 +45,14 @@ class DateTimePage extends Page {
         console.log(data)
 
         let date = new Date()
-        date.setHours(data['#Hours'])
-        date.setMinutes(data['#Minutes'])
+        date.setHours(data['Hours'])
+        date.setMinutes(data['Minutes'])
 
         console.log(date)
 
         this.sendPageData({
             datetime: +date,
-            timezone: Math.round(+data['#TimeZoneOffset'] / 60)
+            timezone: Math.round(+data['TimeZoneOffset'] / 60)
         }, () => {
             this.notify('Time set')
         })
