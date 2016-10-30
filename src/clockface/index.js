@@ -17,7 +17,7 @@ class Clockface {
 	read (date, callback) {
 		// currentclockface read
 
-		this.clockfaceList[0].read(date, callback)
+		this.current.read(date, callback)
 	}
 
 	get list () {

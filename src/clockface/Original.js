@@ -7,12 +7,12 @@ const fields = {
     [OUTERCOLOR]: {
         'type': 'color',
         'label': 'Outer color',
-        'value': [255, 0, 255]
+        'value': [270, 100, 50] // hsl
     },
     [INNERCOLOR]: {
         'type': 'color',
         'label': 'Inner color',
-        'value': [0, 255, 0]
+        'value': [270, 100, 50] // hsl
     }
 }
 

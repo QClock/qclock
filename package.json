@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npm run build:clean && npm run t2:erase; npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:push",
+    "deploy": "npm run build:clean && npm run t2:erase && npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:push",
     "run:local": "npm run build:clean && npm run build:device && npm run config && npm run copy && cd build/; export QTEST=1;node index.js",
     "run:device": "npm run build:clean && npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:run",
     "cleanup": "rm -rf build; mkdir build",

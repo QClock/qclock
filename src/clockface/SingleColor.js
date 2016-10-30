@@ -7,7 +7,7 @@ const fields = {
     [COLOR]: {
         'type': 'color',
         'label': 'Color',
-        'value': [255, 0, 255]
+        'value': [270, 100, 50] // hsl
     }
 }
 

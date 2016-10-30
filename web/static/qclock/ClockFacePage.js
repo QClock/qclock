@@ -3,8 +3,9 @@ const availableFields = {
 	color: function (data) {
 		return `
             <div class="mdl-textfield mdl-js-textfield color-picker mdl-textfield--floating-label is-dirty">
-                <input class="mdl-textfield__input jscolor {onFineChange:'${data.name}FineChange(this)'}" type="text" id="${data.name}" name="${data.name}">
+                <input class="mdl-textfield__input color__input" value="${data.value}" type="text" id="${data.name}" name="${data.name}">
                 <label class="mdl-textfield__label" for="${data.name}">${data.label}</label>
+                <div class="farbtastic__wheel" for="${data.name}" id="${data.name}_wheel"></div>
             </div>`
 	},
 	slider: function (data) {
@@ -12,7 +13,7 @@ const availableFields = {
 			<div><label>${data.label}</label></div>
 			<div class="mdl-textfield">
 				<input class="mdl-slider mdl-js-slider" id="${data.name}" type="range"
-					min="0" max="100" value="25" tabindex="0">
+					min="0" max="100" value="${data.value}" tabindex="0">
 			</div>`
 	}
 }
@@ -23,10 +24,6 @@ class ClockFacePage extends Page {
 
     constructor () {
         super()
-
-        // todo
-        window.outerFineChange = (colorjs) => {this.onChange()}
-        window.innerFineChange = (colorjs) => {this.onChange()}
 
         this.page = 'clockface'
         this.container = this.getContainer()
@@ -74,15 +71,17 @@ class ClockFacePage extends Page {
 				if (availableFields[fieldObj.type]) {
 					let elem  = $('.clockface-settings').append(availableFields[fieldObj.type](fieldObj))
 
+					componentHandler.upgradeElement(document.getElementById(field))
+
 					if (fieldObj.type == 'color') {
-						$(`#${field}`)[0].jscolor = new jscolor($(`#${field}`)[0])
+
+						$(`#${field}_wheel`).farbtastic({ callback: `#${field}`});
+
+						//$(`#${field}`)[0].jscolor = new jscolor($(`#${field}`)[0])
 					}
 				}
 			}
 		}
-
-
-
 
         super.onPageData(data)
 		this.show()

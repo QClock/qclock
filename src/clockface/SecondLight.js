@@ -1,19 +1,21 @@
 const ClockFaceAbstract = require('./ClockFaceAbstract')
 
 const COLOR = 'color'
-const DESATURATE = 'desaturate'
+const LUMINOSITY = 'desaturate'
 
 
 const fields = {
     [COLOR]: {
         'type': 'color',
         'label': 'Colors for both arms',
-        'value': [255, 0, 255]
+        'value': [270, 100, 50] // hsl
     },
-    [DESATURATE]: {
+    [LUMINOSITY]: {
         'type': 'slider',
-        'label': 'Saturation for pair color',
-        'value': 70
+        'label': 'Luminosity for pair color',
+        'value': 50,
+		'min': 0,
+		'max': 100
     }
 }
 
@@ -33,7 +35,7 @@ module.exports = class SecondLight extends ClockFaceAbstract {
     }
 
     getOuterPixels () {
-        let color = this.config.CLOCKFACE[COLOR]
+        let color = this.config.CLOCKFACE[COLOR];
 
         let unitsArray = new Array(this.config.OUTER),
             actual = this.getMinutePixel(),
@@ -52,8 +54,12 @@ module.exports = class SecondLight extends ClockFaceAbstract {
         return Buffer.concat(unitsArray)
     }
 
-    getInnerPixels (date) {
-        let color = this.config.CLOCKFACE[COLOR]
+    getInnerPixels () {
+
+        let color = this.config.CLOCKFACE[COLOR].slice(0)
+
+        color[2] = this.config.CLOCKFACE[LUMINOSITY]
+
         let unitsArray = new Array(this.config.INNER),
             actual = this.getHourPixel(),
             index = 0,

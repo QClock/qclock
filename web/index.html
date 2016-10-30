@@ -38,8 +38,9 @@
             display: inline-block;
         }
 
-        .color-picker input {
-
+        .farbtastic {
+            margin: 0 auto;
+            margin-top: 16px;
         }
 
         .clockface-chooser h6 {
@@ -319,8 +320,12 @@
 
 
     <script type="text/javascript" src="/static/material.min.js"></script>
-    <script type="text/javascript" src="/static/jscolor.min.js"></script>
+    <!-- script type="text/javascript" src="/static/jscolor.min.js"></script -->
     <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $.browser = {msie: false}
+    </script>
+    <script type="text/javascript" src="/static/farbtastic.js"></script>
     <script type="text/javascript" src="/static/qclock/Router.js"></script>
     <script type="text/javascript" src="/static/qclock/Page.js"></script>
     <script type="text/javascript" src="/static/qclock/DateTimePage.js"></script>

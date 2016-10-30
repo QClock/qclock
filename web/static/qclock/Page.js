@@ -40,6 +40,15 @@ class Page {
 
             if (elem.attr('type') === 'checkbox') {
                 data[key] = elem.prop('checked')
+            } else if (elem.hasClass('color__input')) {
+                data[key] = $.farbtastic(`#${elem.attr('id')}_wheel`).hsl.map((val, i) => {
+
+                    if (i) {
+                        return Math.floor(val * 100)
+                    } else {
+                        return Math.floor(val * 360)
+                    }
+                })
             } else {
                 data[key] = elem.val()
             }
@@ -49,8 +58,10 @@ class Page {
     }
 
     setElementValue (element, value) {
-        if (element[0].className.indexOf('jscolor') > -1) {
-            element[0].jscolor.fromString(value)
+        if (element.hasClass('color__input')) {
+            console.log(value)
+            $.farbtastic(`#${element.attr('id')}_wheel`).setHSL([value[0] / 360, value[1]/100 ,value[2]/100])
+
         } else {
             element.val(value)
         }
