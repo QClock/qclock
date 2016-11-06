@@ -24,7 +24,7 @@
   ],
   "dependencies": {
     "body": "^5.1.0",
-    "tessel2-fadecandy": "^1.0.2",
+    "node-fadecandy": "^2.0.1",
     "ws": "^1.1.1"
   },
   "devDependencies": {
