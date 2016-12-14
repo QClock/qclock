@@ -1,5 +1,5 @@
 var http = require('http');
-var config = require('../config/config.js')
+var config = require('../config.js')
 
 var options = {
         host: 'www.timeapi.org',

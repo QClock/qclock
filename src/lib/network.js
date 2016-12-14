@@ -1,4 +1,4 @@
-var config = require('../config/config.js')
+var config = require('../config.js')
 var util = require('util');
 var EventEmitter = require('events');
 var tessel

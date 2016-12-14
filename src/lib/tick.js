@@ -1,4 +1,4 @@
-const config = require('../config/config.js')
+const config = require('../config.js')
 let tick_interval = 0
 let paused = false
 

@@ -1,5 +1,4 @@
-
-module.exports = function getTimeOffset(year, month, day, hour, minute) {
+module.exports = function getTimeOffset (year, month, day, hour, minute) {
     let current = new Date()
     let incoming
 

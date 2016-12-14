@@ -1,5 +1,5 @@
 
-var packagejson = require('../package.json')
+var packagejson = require('./package.json')
 var tessel = true;
 var port = 80
 var skip_facedandy = false

@@ -1,7 +1,7 @@
 
 const EventEmmiter = require('events')
 const FadeCandy = require('tessel2-fadecandy')
-const config = require('../config/config.js')
+const config = require('../config.js')
 
 module.exports = class NeoPixels extends EventEmmiter {
     constructor () {
