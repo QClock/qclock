@@ -99,6 +99,8 @@ class AnimationsPage extends Page {
     displayClock (intArray) {
         var pixels = [];
 
+
+
         intArray.forEach(function (val, i) {
             if (i > 0 && i % 3 == 0) {
                 pixels.push([intArray[i-3],intArray[i-2], intArray[i-1]])
@@ -108,6 +110,8 @@ class AnimationsPage extends Page {
         //console.log(pixels.length)
 
         pixels.forEach(function (p, i) {
+
+            console.log(p)
             var elem = $('.pixel.p--' + i +' span')
 
             var style = {

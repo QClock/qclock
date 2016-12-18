@@ -80,15 +80,32 @@ module.exports = class Server extends HttpServer {
 
         wss.on('connection', (ws) => {
             ws.on('close', this.onWsClose(ws))
-            ws.on('message', (buf)=>{
+            ws.on('message', (json)=>{
+                let data = JSON.parse(json)
 
-                clearTimeout(this.receivePauseTimeout)
+                let { frames, fps } = data;
+
                 this.tick.pause()
-                var ui8 = new Uint8Array(buf.buffer, buf.byteOffset, buf.byteLength / Uint8Array.BYTES_PER_ELEMENT);
-                this.npx.send(ui8)
-                this.setDisplayBuffer(buf)
 
-                this.receivePauseTimeout = setTimeout(()=>{this.tick.resume()}, 1000)
+                let interval = Math.round(1000 / fps)
+
+                let frameInterval = setInterval(() => {
+
+                    if (!frames.length) {
+                        clearInterval(frameInterval)
+                        this.tick.resume()
+                        return;
+                    }
+
+                    let frame = frames.shift()
+
+                    this.npx.send(Uint8Array.from(frame))
+                    this.setDisplayBuffer(Uint8Array.from(frame))
+
+
+                }, interval)
+
+
             })
             this.wsConnections.add(ws)
         });

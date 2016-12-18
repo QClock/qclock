@@ -1,11 +1,13 @@
 const WebSocket = require('ws')
+const hsl2rgb = require('../src/lib/util/hsl-to-rgb')
 
 function getStubPixels () {
         // todo config stub-pixel-count
         return (new Buffer(6 * 3)).fill(0);
     }
 
-var ws = new WebSocket('ws://192.168.1.101:8899');
+//var ws = new WebSocket('ws://192.168.1.101:8899');
+var ws = new WebSocket('ws://127.0.0.1:8899');
 
 ws.on('open', function open() {
 
@@ -23,6 +25,9 @@ ws.on('open', function open() {
 
 // [255, 235,0]
 
+        //let color = hsl2rgb(70, 1, 0.5)
+        let color = hsl2rgb(280, 1, 0.5)
+
         let out = (new Array(58)).fill(new Buffer([0,0,0]))
         let inn = (new Array(56)).fill(new Buffer([0,0,0]))
 
@@ -30,13 +35,13 @@ ws.on('open', function open() {
 
             out = out.map((b, i)=>{
 
-                if ((i + frame % 8) % 8 == 0) return new Buffer([255,255,255])
+                if ((i + frame % 8) % 8 == 0) return new Buffer(color)
 
                 return new Buffer([0,0,0])
             })
 
             inn = inn.map((b, i)=>{
-                return new Buffer([255, 255, 255])
+                return new Buffer(color)
             })
 
 
