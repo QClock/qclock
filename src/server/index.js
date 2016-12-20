@@ -39,6 +39,7 @@ const paths = [
     'clockface',
     'network',
     'animations',
+    'preview',
     'advanced'
 ]
 

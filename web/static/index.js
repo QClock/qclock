@@ -8,6 +8,7 @@ new Router({
     clockface: new ClockFacePage(),
     network: '',
     animations: new AnimationsPage(),
+    preview: new PreviewPage(),
     advanced: '',
 })
 
