@@ -23,9 +23,6 @@ ws.on('open', function open() {
 
         }
 
-// [255, 235,0]
-
-        //let color = hsl2rgb(70, 1, 0.5)
         let color = hsl2rgb(280, 1, 0.5)
 
         let out = (new Array(58)).fill(new Buffer([0,0,0]))

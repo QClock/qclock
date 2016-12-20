@@ -90,10 +90,10 @@ module.exports = class Server extends HttpServer {
                 let interval = Math.round(1000 / fps)
 
                 let frameInterval = setInterval(() => {
-
                     if (!frames.length) {
                         clearInterval(frameInterval)
                         this.tick.resume()
+                        ws.send('finished')
                         return;
                     }
 
@@ -101,11 +101,7 @@ module.exports = class Server extends HttpServer {
 
                     this.npx.send(Uint8Array.from(frame))
                     this.setDisplayBuffer(Uint8Array.from(frame))
-
-
                 }, interval)
-
-
             })
             this.wsConnections.add(ws)
         });
@@ -113,6 +109,7 @@ module.exports = class Server extends HttpServer {
 
     onWsClose (ws) {
         return ()=>{
+            this.tick.resume()
             this.wsConnections.delete(ws)
         }
     }
