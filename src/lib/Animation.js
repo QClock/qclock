@@ -2,6 +2,7 @@
 module.exports = class Animation {
 
     constructor (frame_count, fps, outerIterator, innerIterator, stubPixels = 6) {
+
         this.stubPixels = stubPixels
         this.frame_count = frame_count
         this.fps = fps
@@ -10,6 +11,7 @@ module.exports = class Animation {
 
         this.frames = (new Array(frame_count)).fill([])
         this.frames = this.frames.map((frameArray, frameIndex) => this.renderFrame(frameArray, frameIndex))
+        
     }
 
     getStubPixels () {
@@ -30,10 +32,10 @@ module.exports = class Animation {
     }
 
     render () {
-        return JSON.stringify({
+        return {
             frames: this.frames,
             fps: this.fps
-        })
+        }
     }
 }
 

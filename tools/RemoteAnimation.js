@@ -1,5 +1,5 @@
 const WebSocket = require('ws')
-const Animation = require('./Animation')
+const Animation = require('../src/lib/Animation')
 
 module.exports = class RemoteAnimation extends Animation {
     constructor (frame_count, fps, outerIterator, innerIterator, stubPixels = 6) {
@@ -16,8 +16,7 @@ module.exports = class RemoteAnimation extends Animation {
                 if (msg === 'finished') ws.close();
             })
 
-            ws.send(data)
+            ws.send(JSON.stringify(data))
         });
     }
 }
-

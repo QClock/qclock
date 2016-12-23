@@ -1,5 +1,6 @@
 
 const animations = require('../../animations')
+const Animation = require('../../lib/Animation')
 
 module.exports = function (request, response) {
 
@@ -19,11 +20,28 @@ module.exports = function (request, response) {
     if (method === 'PUT') {
         this.getRequestBody(request, (err, body) => {
 
+            let { fps, frameCount, outer, inner } = animations[body.run];
+
+            let anim = new Animation(fps, frameCount, outer, inner)
+
+            let { frames } = anim.render();
+
             this.tick.pause()
 
-            animations[body.run].run(this, () => {
-                this.tick.resume()
-            })
+            let interval = Math.round(1000 / fps)
+
+            let frameInterval = setInterval(() => {
+                if (!frames.length) {
+                    clearInterval(frameInterval)
+                    this.tick.resume()
+                    return;
+                }
+
+                let frame = frames.shift()
+
+                this.npx.send(Uint8Array.from(frame))
+                this.setDisplayBuffer(Uint8Array.from(frame))
+            }, interval)
 
             response.end('ok')
         })

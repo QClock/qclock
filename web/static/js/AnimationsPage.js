@@ -29,7 +29,7 @@ class AnimationsPage extends Page {
             <button class="mdl-chip animation-chip" data-animation="${data.label}">
                 <span class="mdl-chip__text">${data.name}</span>
                 <a href="#" class="mdl-chip__action"><i class="material-icons">play_circle_filled</i></a>
-            </button>`
+            </button><br />`
 
     }
 
