@@ -24,100 +24,8 @@
 
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href='/static/material.min.css' rel='stylesheet' type='text/css'>
-
-    <style type="text/css">
-        .mdl-textfield.time-hours,
-        .mdl-textfield.time-minutes {
-            width: 80px;
-        }
-
-        h5.time-delimiter {
-            width: 30px;
-            text-align: center;
-            display: inline-block;
-        }
-
-        .farbtastic {
-            margin: 0 auto;
-            margin-top: 16px;
-        }
-
-        .clockface-chooser h6 {
-            display: inline-block;
-            position:relative;
-        }
-
-        .clockface-chooser h6 span {
-            padding-right: 15px;
-        }
-
-        .current-theme {
-            padding: 0 7px 0 0;
-            white-space: pre;
-        }
-
-
-        .pixels {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            width: 500px;
-            height: 500px;
-            transform: translate(-50%, -50%);
-        }
-
-        .pixel {
-            width: 10px;
-            height: 100%;
-            position: absolute;
-            left: 50%;
-            z-index: 5;
-        }
-
-        .pixel span {
-            border-radius: 5px 5px 0 0;
-            background: white;
-            width: 10px;
-            height: 5px;
-            box-shadow: 0 0 14px 3px white;
-            position: absolute;
-            top: 0;
-        }
-
-        .pixel.inner span {
-            transform: rotate(180deg);
-            top: 30px;
-        }
-
-
-        .ring {
-            border-radius: 100%;
-            position: absolute;
-            width: 490px;
-            height: 490px;
-            box-shadow: inset 0 25px 0 white, inset 25px 0 0 white, inset 0 -25px 0 white, inset -25px 0 0 white;
-            z-index: 10;
-            left: 50%;
-            top: 50%;
-            margin-left: 5px;
-            transform: translate(-50%, -50%);
-        }
-
-        .ring.b {
-            transform: translate(-50%, -50%) rotate(45deg)
-        }
-        .ring.shadow {
-            z-index: 6;
-            box-shadow: inset 0 25px 0 lightgray, inset 25px 0 0 lightgray, inset 0 -25px 0 lightgray, inset -25px 0 0 lightgray;
-            -moz-filter: blur(20px);
-            -ms-filter: blur(20px);
-            -webkit-filter: blur(20px);
-            filter: blur(20px);
-            opacity: .6;
-            margin-top: 15px;
-        }
-    </style>
+    <link href='/static/vendor/material.min.css' rel='stylesheet' type='text/css'>
+    <link href='/static/css/qclock.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
@@ -318,6 +226,25 @@
 
             </div>
 
+            <div class="page-content hidden" data-page="advanced">
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <h2>Advanced</h2>
+                    </div>
+                </div>
+
+
+
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--8-col">
+                        <h4>Debug Log</h4>
+                        
+                        <textarea readonly="" class="debug-log"></textarea>
+                    </div>
+                </div>
+
+            </div>
 
         </main>
 
@@ -329,19 +256,20 @@
     </div>
 
 
-    <script type="text/javascript" src="/static/material.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/material.min.js"></script>
     <!-- script type="text/javascript" src="/static/jscolor.min.js"></script -->
-    <script type="text/javascript" src="/static/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/static/vendor/jquery-3.1.1.min.js"></script>
     <script type="text/javascript">
         $.browser = {msie: false}
     </script>
-    <script type="text/javascript" src="/static/farbtastic.js"></script>
-    <script type="text/javascript" src="/static/qclock/Router.js"></script>
-    <script type="text/javascript" src="/static/qclock/Page.js"></script>
-    <script type="text/javascript" src="/static/qclock/DateTimePage.js"></script>
-    <script type="text/javascript" src="/static/qclock/ClockFacePage.js"></script>
-    <script type="text/javascript" src="/static/qclock/AnimationsPage.js"></script>
-    <script type="text/javascript" src="/static/qclock/PreviewPage.js"></script>
+    <script type="text/javascript" src="/static/vendor/farbtastic.js"></script>
+    <script type="text/javascript" src="/static/js/Router.js"></script>
+    <script type="text/javascript" src="/static/js/Page.js"></script>
+    <script type="text/javascript" src="/static/js/DateTimePage.js"></script>
+    <script type="text/javascript" src="/static/js/ClockFacePage.js"></script>
+    <script type="text/javascript" src="/static/js/AnimationsPage.js"></script>
+    <script type="text/javascript" src="/static/js/AdvancedPage.js"></script>
+    <script type="text/javascript" src="/static/js/PreviewPage.js"></script>
     <script type="text/javascript" src="/static/index.js"></script>
 </body>
 </html>
