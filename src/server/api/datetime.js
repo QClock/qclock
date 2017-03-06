@@ -17,8 +17,6 @@ module.exports = function (request, response) {
     if (method === 'PUT') {
         this.getRequestBody(request, (err, body) => {
 
-//            console.log(body)
-
             if (typeof body.timezone !== 'undefined') this.config.TIMEZONE_OFFSET = +body.timezone;
 
             if (typeof body.datetime !== 'undefined') this.config.NTP_OFFSET = getTimeOffset(+body.datetime);

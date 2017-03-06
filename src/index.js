@@ -1,3 +1,4 @@
+const fs = require('fs')
 const packagejson = require('./package.json')
 const config = require('./config.js')
 
@@ -62,3 +63,8 @@ if (config.USE_ADMIN) {
 if (config.USE_NETWORK) {
     network.create();
 }
+
+process.on('uncaughtException', (err) => {
+    fs.appendFileSync('error.log', `${(new Date()).toISOString()} Caught exception: ${err}` + "\n")
+    fs.appendFileSync('error.log', "\t" + `${err.stack}` + "\n")
+});
