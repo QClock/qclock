@@ -17,7 +17,8 @@
     "config": "node tools/setconfig.js",
     "build:device": "babel src --out-dir build",
     "babel": "babel src --out-dir build",
-    "install:prod": "npm i --only=prod"
+    "install:prod": "npm i --only=prod",
+    "postinstall": "hooks/postinstall.sh"
   },
   "repository": "https://github.com/necccc/QTime.git",
   "keywords": [
