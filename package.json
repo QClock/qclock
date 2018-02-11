@@ -16,6 +16,7 @@
     "copy": "cp .tesselinclude build/; cp -RLf web build/",
     "config": "node tools/setconfig.js",
     "build:device": "babel src --out-dir build",
+    "babel": "babel src --out-dir build",
     "install:prod": "npm i --only=prod"
   },
   "repository": "https://github.com/necccc/QTime.git",
@@ -26,22 +27,20 @@
     "time"
   ],
   "dependencies": {
-    "body": "^5.1.0",
     "node-fadecandy": "^2.0.1",
-    "ws": "^1.1.1"
+    "redux": "3.7.2",
+    "pino": "4.10.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "babel-preset-es2015": "^6.16.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-uglify": "^2.0.0",
+    "babel-cli": "6.26.0",
+    "babel-preset-env": "1.6.1",
     "t2-cli": "latest"
   },
   "license": "MIT",
   "readme": "",
   "qclock": {
     "network": {
-      "ssid": "QCLOCK"
+      "ssid": "qclock"
     },
     "display": {},
     "time": 0
