@@ -1,6 +1,6 @@
 const URL = require('url')
 
-import log from '../../log'
+
 import store from '../../store'
 
 import datetime from './datetime'
@@ -27,12 +27,28 @@ const routes = [
     }
 ]
 
+function isApiCall (url) {
+    return /^\/api/.test(url.pathname)
+}
 
 export function match (url) {
 
+    if (!isApiCall(url)) return false
+
+    const apiPath = url.pathname.replace(/^\/api/, '')
+
+    return routes.filter(route => route.path === apiPath).length > 0
 }
 
 export function handle (request, response) {
-    let url = URL.parse(request.url)
-    let page = url.pathname.replace('/', '')
+    const url = URL.parse(request.url)
+    const path = url.pathname.replace(/^\/api/, '')
+
+    const handler = routes.reduce((fn, route) => {
+        if (route.path === path) return route.handler
+
+        return fn
+    }, () => {})
+
+    return handler(store, request, response)
 }

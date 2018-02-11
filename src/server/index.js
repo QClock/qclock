@@ -5,7 +5,7 @@ const path = require('path');
 const URL = require('url')
 
 import log from '../log'
-import routes from './routes'
+import * as routes from './routes'
 
 const set404 = (response) => {
     response.statusCode = 404

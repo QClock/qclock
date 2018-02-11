@@ -2,7 +2,10 @@
 import * as actions from '../actions'
 
 const initialState = {
-    colors: {},
+    colors: {
+        inner: 'FF55BB',
+        outer: '55FFBB'
+    },
     datetime: +new Date(),
     dim: {
         at: 2100,
@@ -21,7 +24,7 @@ export default function reducer (state = initialState, action) {
 
         case actions.SET_TIME:
             return Object.assign({}, state, {
-                datetime: +action.datetime
+                datetime: +(action.datetime)
             });
 
         case actions.SET_DIM:
