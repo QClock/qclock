@@ -41,6 +41,7 @@
   "license": "MIT",
   "readme": "",
   "qclock": {
+    "web": "@qclock/client-aurora",
     "network": {
       "ssid": "qclock"
     },

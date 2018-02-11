@@ -42,7 +42,7 @@ module.exports = class Server extends HttpServer {
 
     __onRequest (request, response) {
 
-        let url = URL.parse(request.url)
+        const url = URL.parse(request.url)
         let page = url.pathname.replace('/', '')
 
         if (routes.match(url)) {
@@ -53,9 +53,12 @@ module.exports = class Server extends HttpServer {
              return response.end(this.__cache[request.url])
         }
 
-        if (url.pathname == '/') {
+        const assetRequest = /\.\w*$/.test(url.pathname)
+
+        if (!assetRequest) {
             page = 'index.html'
         }
+
         const filePath = path.resolve(__dirname + '/../web') + '/' + page;
 
         fs.readFile(filePath, (err, file) => this.__serve(err, file, request, response))
