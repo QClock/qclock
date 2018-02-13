@@ -3,8 +3,8 @@ import * as actions from '../actions'
 
 const initialState = {
     colors: {
-        inner: 'FF55BB',
-        outer: '55FFBB'
+        inner: [ 230 , 100, 50 ],
+        outer: [ 130 , 100, 50 ]
     },
     datetime: +new Date(),
     dim: {

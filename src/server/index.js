@@ -12,11 +12,21 @@ const set404 = (response) => {
     return response.end('not found')
 }
 
+const preflight = (req, res) => {
+
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
+    res.setHeader('Access-Control-Max-Age', 86400);
+
+    res.statusCode = 200
+    return res.end()
+}
+
 module.exports = class Server extends HttpServer {
 
     constructor () {
         super()
-
+        
         this.opened = false
         this.__cache = {}
         this.wsConnections = new Set()
@@ -44,6 +54,10 @@ module.exports = class Server extends HttpServer {
 
         const url = URL.parse(request.url)
         let page = url.pathname.replace('/', '')
+
+        if (request.method === 'OPTIONS') {
+            return preflight(request, response)
+        }
 
         if (routes.match(url)) {
             return routes.handle(request, response);

@@ -50,5 +50,7 @@ export function handle (request, response) {
         return fn
     }, () => {})
 
+    response.setHeader('Access-Control-Allow-Origin', '*');
+
     return handler(store, request, response)
 }

@@ -12,7 +12,7 @@ export default function colors (store, request, response) {
     log.info('colors', method)
 
     if (method === 'GET') {
-        return response.end(JSON.stringify(store.getState().colors))
+        return response.end(JSON.stringify({colors: store.getState().colors }))
     }
 
     if (method === 'PUT') {
@@ -23,7 +23,7 @@ export default function colors (store, request, response) {
                 return response.end()
             }
 
-            store.dispatch(actions.setColors(body))
+            store.dispatch(actions.setColors(body.colors))
             return response.end()
         })
     }
