@@ -11,7 +11,7 @@ export const SET_TIMEZONE = 'SET_TIMEZONE';
 export function setTime (datetime) {
     return {
         type: SET_TIME,
-        datetime: datetime
+        datetime
     };
 }
 

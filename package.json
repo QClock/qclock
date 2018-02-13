@@ -21,7 +21,7 @@
     "postinstall": "hooks/postinstall.sh",
     "start": "docker-compose up -d",
     "stop": "docker-compose down",
-    "serve": "npx nodemon build/index.js",
+    "serve": "npm i -g npm@5 && npx nodemon build/index.js",
     "watch": "npx watch 'npm run babel' ./src"
   },
   "repository": "https://github.com/necccc/QTime.git",

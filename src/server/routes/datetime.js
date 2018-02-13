@@ -12,7 +12,7 @@ export default function colors (store, request, response) {
     log.info('datetime', method)
 
     if (method === 'GET') {
-        return response.end(JSON.stringify(store.getState().datetime))
+        return response.end(JSON.stringify({time: store.getState().datetime }))
     }
 
     if (method === 'PUT') {
@@ -23,7 +23,7 @@ export default function colors (store, request, response) {
                 return response.end()
             }
 
-            store.dispatch(actions.setTime(body))
+            store.dispatch(actions.setTime(body.time))
             return response.end()
         })
     }
