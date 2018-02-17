@@ -25,11 +25,10 @@ class Clockface {
     }
 
     set current (name) {
-
         this.currentIndex = this.clockfaceList.reduce((collect, item, index) => {
             if (item.name === name) return index;
 
-            return collect;
+            return collect
         }, 0)
     }
 

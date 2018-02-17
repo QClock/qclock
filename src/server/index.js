@@ -24,9 +24,10 @@ const preflight = (req, res) => {
 
 module.exports = class Server extends HttpServer {
 
-    constructor () {
+    constructor (store) {
         super()
-        
+
+        this.store = store
         this.opened = false
         this.__cache = {}
         this.wsConnections = new Set()
@@ -60,7 +61,7 @@ module.exports = class Server extends HttpServer {
         }
 
         if (routes.match(url)) {
-            return routes.handle(request, response);
+            return routes.handle(this.store, request, response);
         }
 
         if (this.__cache[request.url]) {

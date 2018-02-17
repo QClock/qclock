@@ -1,8 +1,5 @@
 const URL = require('url')
 
-
-import store from '../../store'
-
 import datetime from './datetime'
 import colors from './colors'
 import dim from './dim'
@@ -40,7 +37,7 @@ export function match (url) {
     return routes.filter(route => route.path === apiPath).length > 0
 }
 
-export function handle (request, response) {
+export function handle (store, request, response) {
     const url = URL.parse(request.url)
     const path = url.pathname.replace(/^\/api/, '')
 

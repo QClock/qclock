@@ -2,6 +2,7 @@
 import * as actions from '../actions'
 
 const initialState = {
+    utcOffset: 0,
     colors: {
         inner: [ 230 , 100, 50 ],
         outer: [ 130 , 100, 50 ]
@@ -13,7 +14,13 @@ const initialState = {
         level: 30,
         active: false
     },
-    timezone: 60
+    timezone: 1,
+    // internal stuff
+    interval: 1000,
+    outerPixelCount: 58,
+    innerPixelCount: 56,
+    stubPixelCount: 6,
+    zeroColor: [ 0, 0, 0]
 }
 
 export default function reducer (state = initialState, action) {
@@ -37,6 +44,11 @@ export default function reducer (state = initialState, action) {
         case actions.SET_TIMEZONE:
             return Object.assign({}, state, {
                 timezone: action.timezone
+            });
+
+        case actions.SET_UTCOFFSET:
+            return Object.assign({}, state, {
+                utcOffset: action.utcOffset
             });
 
         default:

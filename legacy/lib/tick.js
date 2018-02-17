@@ -7,9 +7,8 @@ module.exports = (function () {
     var cb
 
     function start (next) {
-        cb = next;
-        cb()
-        run(cb)
+        next()
+        run(next)
     }
 
     function run (next) {
