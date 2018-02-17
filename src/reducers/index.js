@@ -8,8 +8,10 @@ const initialState = {
     },
     datetime: +new Date(),
     dim: {
-        at: 2100,
-        to: 0.3
+        from: 21,
+        to: 6,
+        level: 30,
+        active: false
     },
     timezone: 60
 }

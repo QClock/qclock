@@ -3,13 +3,13 @@ const jsonBody = require("body/json")
 import log from '../../log'
 import * as actions from '../../actions'
 
-export default function colors (store, request, response) {
+export default function dim (store, request, response) {
 
     const {
         method
     } = request
 
-    log.info('datetime', method)
+    log.info('dim', method)
 
     if (method === 'GET') {
         return response.end(JSON.stringify(store.getState().dim))
@@ -24,7 +24,7 @@ export default function colors (store, request, response) {
             }
 
             store.dispatch(actions.setDim(body))
-            return response.end()
+            return response.end(JSON.stringify({success: true}))
         })
     }
 }

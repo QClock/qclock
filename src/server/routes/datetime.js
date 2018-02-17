@@ -24,7 +24,7 @@ export default function colors (store, request, response) {
             }
 
             store.dispatch(actions.setTime(body.time))
-            return response.end()
+            return response.end(JSON.stringify({success: true}))
         })
     }
 }

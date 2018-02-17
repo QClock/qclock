@@ -10,11 +10,11 @@ services:
     ports:
         - "9090:9090"
     working_dir: /usr/src/app
-    command: ["npm", "run", "serve"]
+    command: ["npm", "run", "serve-docker"]
 
   watch:
     image: node:9-alpine
     volumes:
         - .:/usr/src/app
     working_dir: /usr/src/app
-    command: ["npm", "run", "watch"]
+    command: ["npm", "run", "watch-docker"]

@@ -15,14 +15,14 @@
     "t2:run": "t2 run .",
     "copy": "cp .tesselinclude build/; cp -RLf web build/",
     "config": "node tools/setconfig.js",
-    "build:device": "babel src --out-dir build",
-    "babel": "babel src --out-dir build",
+    "build": "babel src --out-dir build",
+    "prebuild": "scripts/prebuild.sh",
+    "babel": "npm run babel",
     "install:prod": "npm i --only=prod",
-    "postinstall": "hooks/postinstall.sh",
     "start": "docker-compose up -d",
     "stop": "docker-compose down",
-    "serve": "npm i -g npm@5 && npx nodemon build/index.js",
-    "watch": "npx watch 'npm run babel' ./src"
+    "serve-docker": "npm i -g npm@5 && npx nodemon build/index.js",
+    "watch-docker": "npx watch 'npm run babel' ./src"
   },
   "repository": "https://github.com/necccc/QTime.git",
   "keywords": [
@@ -43,7 +43,8 @@
     "babel-watch": "2.0.7",
     "nodemon": "1.14.12",
     "t2-cli": "latest",
-    "watch": "1.0.2"
+    "watch": "1.0.2",
+    "@qclock/client-aurora": "1.0.1"
   },
   "license": "MIT",
   "readme": "",

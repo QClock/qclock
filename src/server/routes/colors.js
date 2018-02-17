@@ -24,7 +24,7 @@ export default function colors (store, request, response) {
             }
 
             store.dispatch(actions.setColors(body.colors))
-            return response.end()
+            return response.end(JSON.stringify({success: true}))
         })
     }
 }
