@@ -1,5 +1,7 @@
 const pino = require('pino')({
-    prettyPrint: true
+    prettyPrint: true,
+    level: process.env.DEBUGLEVEL,
+    base: null
 })
 
 export default pino

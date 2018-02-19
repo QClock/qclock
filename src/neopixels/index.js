@@ -1,7 +1,5 @@
 import EventEmitter from 'events'
 import log from '../log'
-const { TESSEL } = process.env
-
 
 
 
@@ -12,7 +10,7 @@ export default class NeoPixels extends EventEmitter {
 
         this.ready = false
 
-        if (TESSEL) {
+        if (process.env.TESSEL) {
             const FadeCandy = require('node-fadecandy')
             this.fadecandy = new FadeCandy()
             this.fadecandy.on(FadeCandy.events.READY, (...args) => {
@@ -30,7 +28,6 @@ export default class NeoPixels extends EventEmitter {
     }
 
     send (data) {
-        log.info('sending data to FadeCandy')
         if (this.ready && this.fadecandy) {
             this.fadecandy.send(data)
         }

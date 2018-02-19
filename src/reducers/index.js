@@ -1,9 +1,11 @@
 
 import * as actions from '../actions'
-
+import log from '../log'
 import initialState from '../state'
 
 export default function reducer (state = initialState, action) {
+
+    log.info('ACTION', action)
 
     switch (action.type) {
         case actions.SET_NETWORK:

@@ -1,4 +1,4 @@
-require('dotenv').config({path: '/tmp/remote-script/.env'})
+import './env'
 
 import log from './log'
 import store from './store'
