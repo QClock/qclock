@@ -3,18 +3,18 @@ version: '2'
 
 services:
 
-  serve:
-    image: node:6.10-alpine
-    volumes:
+    serve:
+        image: node:4.5-alpine
+        volumes:
         - .:/usr/src/app
-    ports:
+        ports:
         - "9090:9090"
-    working_dir: /usr/src/app
-    command: ["npm", "run", "serve-docker"]
+        working_dir: /usr/src/app
+        command: ["npm", "run", "serve-docker"]
 
-  watch:
-    image: node:9-alpine
-    volumes:
-        - .:/usr/src/app
-    working_dir: /usr/src/app
-    command: ["npm", "run", "watch-docker"]
+    watch:
+        image: node:9-alpine
+        volumes:
+            - .:/usr/src/app
+        working_dir: /usr/src/app
+        command: ["npm", "run", "watch-docker"]

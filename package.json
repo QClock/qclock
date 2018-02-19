@@ -1,19 +1,18 @@
 {
   "name": "qclock",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "npm run build:clean && npm run t2:erase ; npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:push",
-    "local": "npm run build:clean && npm run build:device && npm run config && npm run copy && cd build/; export QTEST=1;node index.js",
-    "device": "npm run build:clean && npm run build:device && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:run",
+    "deploy": "npm run t2:erase ; npm run build && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:push",
+    "local": "npm run build && npm run config && npm run copy && cd build/; export QTEST=1;node index.js",
+    "device": "npm run build && npm run config && npm run copy && cd build/ && npm run install:prod && npm run t2:run",
     "cleanup": "rm -rf build; mkdir build",
-    "build:clean": "rm -rf build/web",
     "t2:erase": "t2 erase",
     "t2:push": "t2 push .",
     "t2:run": "t2 run .",
-    "copy": "cp .tesselinclude build/; cp -RLf web build/",
+    "copy": "cp .tesselinclude build/; cp .npmrc build/",
     "config": "node tools/setconfig.js",
     "install:prod": "npm i --only=prod",
     "build": "npm run babel",
@@ -33,7 +32,7 @@
   ],
   "dependencies": {
     "body": "5.1.0",
-    "node-fadecandy": "^2.0.1",
+    "node-fadecandy": "2.0.5-useoldusb.0",
     "pino": "4.10.4",
     "redux": "3.7.2"
   },
@@ -42,9 +41,8 @@
     "babel-preset-env": "1.6.1",
     "babel-watch": "2.0.7",
     "nodemon": "1.14.12",
-    "t2-cli": "latest",
     "watch": "1.0.2",
-    "@qclock/client-aurora": "1.0.1"
+    "@qclock/client-aurora": "1.0.2"
   },
   "license": "MIT",
   "readme": "",

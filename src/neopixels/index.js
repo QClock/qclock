@@ -1,5 +1,5 @@
 
-import { EventEmmiter } from 'events'
+import EventEmmiter from 'events'
 import log from '../log'
 
 const FadeCandy = require('node-fadecandy')
@@ -14,11 +14,14 @@ export default class NeoPixels extends EventEmmiter {
         //if (!config.SKIP_FADECANDY) {
 
             this.fadecandy = new FadeCandy()
-            this.fadecandy.on(FadeCandy.events.READY, () => {
+            this.fadecandy.on(FadeCandy.events.READY, (...args) => {
+                log.info(args)
                 //fadecandy.config.set(fadecandy.Configuration.schema.DISABLE_KEYFRAME_INTERPOLATION, 1)
                 this.fadecandy.clut.create()
             })
-            this.fadecandy.on(FadeCandy.events.COLOR_LUT_READY, () => {
+            this.fadecandy.on(FadeCandy.events.COLOR_LUT_READY, (...args) => {
+
+                log.info(args)
                 log.info('LUT READY')
                 this.ready = true
             })
@@ -29,6 +32,7 @@ export default class NeoPixels extends EventEmmiter {
     }
 
     send (data) {
+        log.info('sending data to FadeCandy')
         if (this.ready && this.fadecandy) {
             this.fadecandy.send(data)
         }
