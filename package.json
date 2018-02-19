@@ -12,7 +12,7 @@
     "t2:erase": "t2 erase",
     "t2:push": "t2 push .",
     "t2:run": "t2 run .",
-    "copy": "cp .tesselinclude build/; cp .npmrc build/",
+    "copy": "cp .tesselinclude build/ ; cp .npmrc build/ ; cp scripts/.env build/",
     "config": "node tools/setconfig.js",
     "install:prod": "npm i --only=prod",
     "build": "npm run babel",
@@ -32,17 +32,19 @@
   ],
   "dependencies": {
     "body": "5.1.0",
+    "dotenv": "5.0.0",
     "node-fadecandy": "2.0.5-useoldusb.0",
     "pino": "4.10.4",
     "redux": "3.7.2"
   },
   "devDependencies": {
+    "@qclock/client-aurora": "1.0.2",
     "babel-cli": "6.26.0",
+    "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.6.1",
     "babel-watch": "2.0.7",
     "nodemon": "1.14.12",
-    "watch": "1.0.2",
-    "@qclock/client-aurora": "1.0.2"
+    "watch": "1.0.2"
   },
   "license": "MIT",
   "readme": "",

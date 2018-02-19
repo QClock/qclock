@@ -13,3 +13,4 @@ reducers/*
 server/*
 time/*
 web/*
+.env

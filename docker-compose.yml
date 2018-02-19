@@ -4,7 +4,7 @@ version: '2'
 services:
 
     serve:
-        image: node:4.5-alpine
+        image: node:4-alpine
         volumes:
         - .:/usr/src/app
         ports:

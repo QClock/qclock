@@ -1,5 +1,20 @@
 import log from '../log'
 
+
+const needImmediateTick = function (newState, oldState) {
+    const props = [
+        'utcOffset',
+        'colors',
+        'dim',
+        'timezone'
+    ]
+
+    return props.reduce((bool, prop) => {
+        if (bool) return bool;
+        return JSON.stringify(newState[prop]) != JSON.stringify(oldState[prop])
+    }, false)
+}
+
 export default class ClockWork {
 
     constructor (store) {
@@ -7,7 +22,20 @@ export default class ClockWork {
         this.tick_interval = 0
         this.paused = false
         this.callback = () => {}
-        this.store.subscribe(() => this.now(this.callback))
+
+        this.currentState = this.store.getState()
+
+        this.store.subscribe(() => this.update())
+    }
+
+    update () {
+        const state = this.store.getState()
+
+        if (needImmediateTick(state, this.currentState)) {
+            this.now(this.callback)
+        }
+
+        this.currentState = state
     }
 
     start (next) {

@@ -1,18 +1,19 @@
-
-import EventEmmiter from 'events'
+import EventEmitter from 'events'
 import log from '../log'
+const { TESSEL } = process.env
 
-const FadeCandy = require('node-fadecandy')
 
-export default class NeoPixels extends EventEmmiter {
+
+
+export default class NeoPixels extends EventEmitter {
 
     constructor () {
         super()
 
         this.ready = false
 
-        //if (!config.SKIP_FADECANDY) {
-
+        if (TESSEL) {
+            const FadeCandy = require('node-fadecandy')
             this.fadecandy = new FadeCandy()
             this.fadecandy.on(FadeCandy.events.READY, (...args) => {
                 log.info(args)
@@ -25,10 +26,7 @@ export default class NeoPixels extends EventEmmiter {
                 log.info('LUT READY')
                 this.ready = true
             })
-
-        //} else {
-          //  log.info('FadeCandy module skipped by config!')
-        //}
+        }
     }
 
     send (data) {

@@ -36,19 +36,21 @@ module.exports = class Server extends HttpServer {
         this.on('clientError', exception => this.__onError(exception))
     }
 
-    start (network) {
+    start () {
         if (this.opened) return
 
-        this.listen(network.port, network.ip)
+        const network = this.store.getState().network
+
+        this.listen(network.port, '0.0.0.0')
 
         this.opened = true
     }
 
     disconnect () {
-        if (!this.opened) return;
+        if (!this.opened) return
 
-        this.opened = false;
-        this.close();
+        this.opened = false
+        this.close()
     }
 
     __onRequest (request, response) {

@@ -5,6 +5,7 @@ export default class Time {
 
     constructor (store) {
         this.store = store
+        this.currentOffset = this.store.getState().utcOffset;
         this.store.subscribe(() => this.update())
     }
 
@@ -21,10 +22,13 @@ export default class Time {
     }
 
     update () {
-        const { datetime } = this.store.getState()
-        const utcOffset = getTimeOffset(datetime)
+        const { datetime, utcOffset } = this.store.getState()
 
-        store.dispatch(actions.setUtcOffset(utcOffset))
+        if (this.currentOffset == utcOffset) return;
+
+        const newUtcOffset = getTimeOffset(datetime)
+        this.currentOffset = newUtcOffset;
+        this.store.dispatch(actions.setUtcOffset(newUtcOffset))
     }
 }
 

@@ -1,31 +1,16 @@
 
 import * as actions from '../actions'
 
-const initialState = {
-    utcOffset: 0,
-    colors: {
-        inner: [ 230 , 100, 50 ],
-        outer: [ 130 , 100, 50 ]
-    },
-    datetime: +new Date(),
-    dim: {
-        from: 21,
-        to: 6,
-        level: 30,
-        active: false
-    },
-    timezone: 1,
-    // internal stuff
-    interval: 1000,
-    outerPixelCount: 58,
-    innerPixelCount: 56,
-    stubPixelCount: 6,
-    zeroColor: [ 0, 0, 0]
-}
+import initialState from '../state'
 
 export default function reducer (state = initialState, action) {
 
     switch (action.type) {
+        case actions.SET_NETWORK:
+            return Object.assign({}, state, {
+                network: action.network
+            });
+
         case actions.SET_COLORS:
             return Object.assign({}, state, {
                 colors: action.colors
