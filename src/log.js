@@ -1,6 +1,6 @@
 const pino = require('pino')({
     prettyPrint: true,
-    level: process.env.DEBUGLEVEL,
+    level: process.env.DEBUGLEVEL || 'info',
     base: null
 })
 

@@ -1,3 +1,9 @@
+let port = 80
+
+if (process.env.NODE_ENV === 'docker') {
+    port = 9090
+}
+
 export default {
     utcOffset: 0,
     colors: {

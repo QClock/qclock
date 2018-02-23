@@ -2,6 +2,7 @@
 
 cp .tesselinclude build/
 cp .npmrc build/
+cp package.json build/
 
 if [ $NODE_ENV == "production" ];
 then

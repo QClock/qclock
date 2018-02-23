@@ -10,7 +10,6 @@ const events = {
     TIMEOUT: 'timeout'
 }
 
-
 export default class Network extends EventEmitter {
 
     static READY = events.READY
@@ -19,6 +18,7 @@ export default class Network extends EventEmitter {
         super()
 
         this.created = false
+        this.store = store
 
         if (process.env.TESSEL) {
             this.network = require('tessel').network
@@ -26,9 +26,8 @@ export default class Network extends EventEmitter {
         } else {
             log.info('Mocked network layer')
             this.network = new Net()
+            this.create()
         }
-
-        this.store = store
 
         this.network.ap.on(events.ERROR, (err)=>this.__onError(err))
     }
@@ -52,7 +51,7 @@ export default class Network extends EventEmitter {
     __onCreated (err, settings) {
         if (err) return log.fatal(err)
 
-        log.info('Network created!', settings)
+        log.info('Network created!')
 
         let network = Object.assign({}, this.store.getState().network, settings)
         this.store.dispatch(actions.setNetwork(network))

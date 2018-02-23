@@ -16,7 +16,6 @@
     "pret2run": "npm run install-prod",
     "t2push": "t2 push .",
     "t2run": "t2 run .",
-
     "config": "node tools/setconfig.js",
     "install-prod": "npm i --only=prod",
     "prebuild": "scripts/prebuild.sh",
@@ -41,7 +40,7 @@
     "redux": "3.7.2"
   },
   "devDependencies": {
-    "@qclock/client-aurora": "1.0.3",
+    "@qclock/client-aurora": "1.0.4",
     "babel-cli": "6.26.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.6.1",
