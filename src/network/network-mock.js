@@ -11,7 +11,7 @@ export default class Net extends EventEmitter {
         this.ap = {
             on: function () {},
             create: (data, callback) => {
-                setTimeout(()=>{ callback(null, {ip: '0.0.0.0', port: 9090 }) }, 400)
+                setTimeout(()=>{ callback(null, {ip: '0.0.0.0' }) }, 400)
             }
         }
     }
