@@ -19,7 +19,14 @@ export default {
     },
     timezone: 1,
 
+    // client config
+
+    clientConfig: {
+        PUT_RATELIMIT: 0
+    },
+
     // internal stuff
+
     interval: 1000,
     outerPixelCount: 58,
     innerPixelCount: 56,
@@ -29,6 +36,6 @@ export default {
         ssid: 'QCLOCK',
         security: '',
         password: '',
-        port: 80
+        port
     }
 }

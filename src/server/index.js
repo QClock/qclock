@@ -78,14 +78,18 @@ module.exports = class Server extends HttpServer {
 
         const filePath = path.resolve(__dirname + '/../web') + '/' + page;
 
-        fs.readFile(filePath, (err, file) => this.__serve(err, file, request, response))
+        fs.readFile(filePath, (err, file) => this.__serve(err, file, assetRequest, request, response))
     }
 
-    __serve (err, file, request, response) {
+    __serve (err, file, assetRequest, request, response) {
         if (err) {
             console.log(err)
             response.statusCode = 404
             return response.end('not found')
+        }
+
+        if (!assetRequest) {
+            file = this.injectConfig(file);
         }
 
         response.setHeader('Last-Modified', new Date())
@@ -99,6 +103,13 @@ module.exports = class Server extends HttpServer {
 
     __onError (exception) {
         log.error(exception);
+    }
+
+    injectConfig (html) {
+
+        return html.toString().replace(/\/\* QCLOCKCONSTANTS \*\//, `window.QCLOCK = ${JSON.stringify(this.store.getState().clientConfig)};`);
+
+
     }
 
 }

@@ -23,7 +23,17 @@ export default function colors (store, request, response) {
                 return response.end()
             }
 
-            store.dispatch(actions.setColors(body.colors))
+            const { colors } = body
+
+            if (colors.inner[0] > 360) {
+                colors.inner[0] = 360
+            }
+
+            if (colors.outer[0] > 360) {
+                colors.outer[0] = 360
+            }
+
+            store.dispatch(actions.setColors(colors))
             return response.end(JSON.stringify({success: true}))
         })
     }
