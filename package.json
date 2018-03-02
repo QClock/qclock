@@ -41,7 +41,7 @@
 	"redux": "3.7.2"
   },
   "devDependencies": {
-	"@qclock/client-aurora": "1.1.1",
+	"@qclock/client-aurora": "1.2.0",
 	"babel-cli": "6.26.0",
 	"babel-plugin-transform-class-properties": "6.24.1",
 	"babel-preset-env": "1.6.1",
