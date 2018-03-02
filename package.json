@@ -4,66 +4,66 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose up -d",
-    "stop": "docker-compose down",
-    "deploy": "npm run erase ; export NODE_ENV=production; npm run build && cd build/ && npm run t2push",
-    "device": "export NODE_ENV=development; npm run build && cd build/ && npm run t2run",
-    "cleanup": "rm -rf build; mkdir build",
-    "erase": "t2 erase",
-    "prestart": "export NODE_ENV=docker; npm run build",
-    "pret2push": "npm run install-prod",
-    "pret2run": "npm run install-prod",
-    "t2push": "t2 push .",
-    "t2run": "t2 run .",
-    "config": "node tools/setconfig.js",
-    "install-prod": "npm i --only=prod",
-    "prebuild": "scripts/prebuild.sh",
-    "build": "npm run babel",
-    "postbuild": "scripts/postbuild.sh",
-    "babel": "babel src --out-dir build",
-    "serve-docker": "npm i -g npm@5 && npx nodemon build/index.js",
-    "watch-docker": "npx watch 'npm run babel' ./src"
+	"test": "echo \"Error: no test specified\" && exit 1",
+	"start": "docker-compose up -d",
+	"stop": "docker-compose down",
+	"deploy": "npm run erase ; export NODE_ENV=production; npm run build && cd build/ && npm run t2push",
+	"device": "export NODE_ENV=development; npm run build && cd build/ && npm run t2run",
+	"cleanup": "rm -rf build; mkdir build",
+	"erase": "t2 erase",
+	"prestart": "export NODE_ENV=docker; npm run build",
+	"pret2push": "npm run install-prod",
+	"pret2run": "npm run install-prod",
+	"t2push": "t2 push .",
+	"t2run": "t2 run .",
+	"config": "node tools/setconfig.js",
+	"install-prod": "npm i --only=prod",
+	"prebuild": "scripts/prebuild.sh",
+	"build": "npm run babel",
+	"postbuild": "scripts/postbuild.sh",
+	"babel": "babel src --out-dir build",
+	"serve-docker": "npm i -g npm@5 && npx nodemon build/index.js",
+	"watch-docker": "npx watch 'npm run babel' ./src"
   },
   "repository": "https://github.com/necccc/QTime.git",
   "keywords": [
-    "Tessel",
-    "fadecandy",
-    "clock",
-    "time"
+	"Tessel",
+	"fadecandy",
+	"clock",
+	"time"
   ],
   "dependencies": {
-    "body": "5.1.0",
-    "dotenv": "5.0.0",
-    "node-fadecandy": "2.0.4",
-    "npm-lifecycle-test": "1.0.0",
-    "pino": "4.10.4",
-    "redux": "3.7.2"
+	"body": "5.1.0",
+	"dotenv": "5.0.0",
+	"node-fadecandy": "2.0.4",
+	"npm-lifecycle-test": "1.0.0",
+	"pino": "4.10.4",
+	"redux": "3.7.2"
   },
   "devDependencies": {
-    "@qclock/client-aurora": "1.1.1",
-    "babel-cli": "6.26.0",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-preset-env": "1.6.1",
-    "babel-watch": "2.0.7",
-    "nodemon": "1.14.12",
-    "watch": "1.0.2"
+	"@qclock/client-aurora": "1.1.1",
+	"babel-cli": "6.26.0",
+	"babel-plugin-transform-class-properties": "6.24.1",
+	"babel-preset-env": "1.6.1",
+	"babel-watch": "2.0.7",
+	"nodemon": "1.14.12",
+	"watch": "1.0.2"
   },
   "license": "MIT",
   "readme": "",
   "nodemonConfig": {
-    "ignore": [
-      "test/*",
-      "docs/*"
-    ],
-    "delay": "2000"
+	"ignore": [
+	  "test/*",
+	  "docs/*"
+	],
+	"delay": "2000"
   },
   "qclock": {
-    "web": "@qclock/client-aurora",
-    "network": {
-      "ssid": "qclock"
-    },
-    "display": {},
-    "time": 0
+	"web": "@qclock/client-aurora",
+	"network": {
+	  "ssid": "qclock"
+	},
+	"display": {},
+	"time": 0
   }
 }
