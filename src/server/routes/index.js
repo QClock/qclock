@@ -4,23 +4,33 @@ import datetime from './datetime'
 import colors from './colors'
 import dim from './dim'
 import timezone from './timezone'
+import advanced from './advanced'
 
 const routes = [
     {
+        name: 'datetime',
         path: '/datetime',
         handler: datetime
     },
     {
+        name: 'colors',
         path: '/colors',
         handler: colors
     },
     {
+        name: 'dim',
         path: '/dim',
         handler: dim
     },
     {
+        name: 'timezone',
         path: '/timezone',
         handler: timezone
+    },
+    {
+        name: 'advanced',
+        path: '/advanced',
+        handler: advanced
     }
 ]
 
@@ -47,7 +57,18 @@ export function handle (store, request, response) {
         return fn
     }, () => {})
 
-    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Origin', '*')
 
     return handler(store, request, response)
+}
+
+export function socket (store, data) {
+    const handler = routes.reduce((fn, route) => {
+        if (route.name in data) return route.handler
+        return fn
+    }, () => {})
+
+    data.method = 'SOCKET'
+
+    handler(store, data)
 }

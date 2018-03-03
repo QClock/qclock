@@ -2,21 +2,21 @@
 version: '2'
 
 services:
+  serve:
+    image: node:6-alpine
+    volumes:
+    - .:/usr/src/app
+    ports:
+    - "9090:9090"
+    - "8088:8088"
+    working_dir: /usr/src/app
+    environment:
+    - NODE_ENV=docker
+    command: ["npm", "run", "serve-docker"]
 
-	serve:
-		image: node:6-alpine
-		volumes:
-		- .:/usr/src/app
-		ports:
-		- "9090:9090"
-		working_dir: /usr/src/app
-		environment:
-		- NODE_ENV=docker
-		command: ["npm", "run", "serve-docker"]
-
-	watch:
-		image: node:9-alpine
-		volumes:
-			- .:/usr/src/app
-		working_dir: /usr/src/app
-		command: ["npm", "run", "watch-docker"]
+  watch:
+    image: node:9-alpine
+    volumes:
+    - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: ["npm", "run", "watch-docker"]

@@ -3,16 +3,16 @@ const jsonBody = require("body/json")
 import log from '../../log'
 import * as actions from '../../actions'
 
-export default function colors (store, request, response) {
+export default function advanced (store, request, response) {
 
     const {
         method
     } = request
 
-    log.info('datetime', method)
+    log.info('advanced', method)
 
     if (method === 'GET') {
-        return response.end(JSON.stringify({time: store.getState().datetime }))
+        return response.end(JSON.stringify(store.getState().advanced))
     }
 
     if (method === 'PUT') {
@@ -23,12 +23,12 @@ export default function colors (store, request, response) {
                 return response.end()
             }
 
-            store.dispatch(actions.setTime(body.time))
+            store.dispatch(actions.setAdvanced(body))
             return response.end(JSON.stringify({success: true}))
         })
     }
 
     if (method === 'SOCKET') {
-        store.dispatch(actions.setColors(request.datetime))
+        store.dispatch(actions.setColors(request.advanced))
     }
 }

@@ -27,4 +27,8 @@ export default function colors (store, request, response) {
             return response.end(JSON.stringify({success: true}))
         })
     }
+
+    if (method === 'SOCKET') {
+        store.dispatch(actions.setColors(request.timezone))
+    }
 }

@@ -1,7 +1,7 @@
-
 const HttpServer = require('http').Server
-const fs = require('fs');
-const path = require('path');
+const WebSocket = require('ws')
+const fs = require('fs')
+const path = require('path')
 const URL = require('url')
 
 import log from '../log'
@@ -13,11 +13,9 @@ const set404 = (response) => {
 }
 
 const preflight = (req, res) => {
-
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS');
-    res.setHeader('Access-Control-Max-Age', 86400);
-
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, OPTIONS')
+    res.setHeader('Access-Control-Max-Age', 86400)
     res.statusCode = 200
     return res.end()
 }
@@ -42,7 +40,14 @@ module.exports = class Server extends HttpServer {
         const network = this.store.getState().network
 
         this.listen(network.port, '0.0.0.0')
+        this.wss = new WebSocket.Server({
+            host: '0.0.0.0',
+            port: network.websocketPort
+        })
 
+        this.wss.on('connection', (ws) => this.onSocketConnection(ws))
+        this.wss.on('error', (err) => log.error(err))
+        this.wss.on('listening', () => log.info('WS listening', this.wss.address()))
         this.opened = true
     }
 
@@ -53,8 +58,24 @@ module.exports = class Server extends HttpServer {
         this.close()
     }
 
-    __onRequest (request, response) {
+    onSocketConnection (ws) {
+        log.info('new websocket connection')
 
+        ws.on('error', (err) => log.error(err))
+
+        ws.on('message', (message) => {
+            let data = {}
+            try {
+                data = JSON.parse(message)
+            } catch (e) {
+                log.error(e)
+            }
+
+            routes.socket(this.store, data)
+        })
+    }
+
+    __onRequest (request, response) {
         const url = URL.parse(request.url)
         let page = url.pathname.replace('/', '')
 
@@ -63,11 +84,11 @@ module.exports = class Server extends HttpServer {
         }
 
         if (routes.match(url)) {
-            return routes.handle(this.store, request, response);
+            return routes.handle(this.store, request, response)
         }
 
         if (this.__cache[request.url]) {
-             return response.end(this.__cache[request.url])
+            return response.end(this.__cache[request.url])
         }
 
         const assetRequest = /\.\w*$/.test(url.pathname)
@@ -76,7 +97,7 @@ module.exports = class Server extends HttpServer {
             page = 'index.html'
         }
 
-        const filePath = path.resolve(__dirname + '/../web') + '/' + page;
+        const filePath = path.resolve(__dirname + '/../web') + '/' + page
 
         fs.readFile(filePath, (err, file) => this.__serve(err, file, assetRequest, request, response))
     }
@@ -89,7 +110,7 @@ module.exports = class Server extends HttpServer {
         }
 
         if (!assetRequest) {
-            file = this.injectConfig(file);
+            file = this.injectConfig(file)
         }
 
         response.setHeader('Last-Modified', new Date())
@@ -102,14 +123,11 @@ module.exports = class Server extends HttpServer {
     }
 
     __onError (exception) {
-        log.error(exception);
+        log.error(exception)
     }
 
     injectConfig (html) {
-
-        return html.toString().replace(/\/\* QCLOCKCONSTANTS \*\//, `window.QCLOCK = ${JSON.stringify(this.store.getState().clientConfig)};`);
-
-
+        return html.toString().replace(/\/\* QCLOCKCONSTANTS \*\//, `window.QCLOCK = ${JSON.stringify(this.store.getState().clientConfig)};`)
     }
 
 }

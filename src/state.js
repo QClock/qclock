@@ -18,11 +18,16 @@ export default {
         active: false
     },
     timezone: 1,
+    advanced: {
+        useSocket: false
+    },
 
     // client config
 
     clientConfig: {
-        PUT_RATELIMIT: 0
+        API_PORT: port,
+        PUT_RATELIMIT: 0,
+        WS_PORT: 8088
     },
 
     // internal stuff
@@ -33,6 +38,7 @@ export default {
     stubPixelCount: 6,
     zeroColor: [ 0, 0, 0],
     network: {
+        websocketPort: 8088,
         ssid: 'QCLOCK',
         security: '',
         password: '',

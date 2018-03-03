@@ -38,6 +38,11 @@ export default function reducer (state = initialState, action) {
                 utcOffset: action.utcOffset
             });
 
+        case actions.SET_ADVANCED:
+            return Object.assign({}, state, {
+                advanced: action.advanced
+            });
+
         default:
             return state;
     }
