@@ -8,7 +8,7 @@ import advanced from './advanced'
 
 const routes = [
     {
-        name: 'datetime',
+        name: 'time',
         path: '/datetime',
         handler: datetime
     },
