@@ -29,6 +29,6 @@ export default function advanced (store, request, response) {
     }
 
     if (method === 'SOCKET') {
-        store.dispatch(actions.setColors(request.advanced))
+        store.dispatch(actions.setAdvanced(request.advanced))
     }
 }

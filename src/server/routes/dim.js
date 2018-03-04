@@ -29,6 +29,6 @@ export default function dim (store, request, response) {
     }
 
     if (method === 'SOCKET') {
-        store.dispatch(actions.setColors(request.dim))
+        store.dispatch(actions.setDim(request.dim))
     }
 }

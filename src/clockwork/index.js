@@ -32,7 +32,7 @@ export default class ClockWork {
         const state = this.store.getState()
 
         if (needImmediateTick(state, this.currentState)) {
-            this.now(this.callback) 
+            this.now(this.callback)
         }
 
         this.currentState = state

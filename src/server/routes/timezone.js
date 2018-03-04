@@ -29,6 +29,6 @@ export default function colors (store, request, response) {
     }
 
     if (method === 'SOCKET') {
-        store.dispatch(actions.setColors(request.timezone))
+        store.dispatch(actions.setTimeZone(request.timezone))
     }
 }
