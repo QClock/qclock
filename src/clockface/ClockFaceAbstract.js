@@ -28,7 +28,8 @@ export default class ClockFaceAbstract {
             dim.active &&
             (this.date.getHours() > dim.from || this.date.getHours() < dim.to)
         ) {
-            rgbColor = dimRGB(dim.level, rgbColor)
+            let lightness = Math.round((dim.level / 100) * 50)
+            rgbColor = hsl2rgb(hslColor[0], hslColor[1], lightness)
         }
 
         return rgbColor
