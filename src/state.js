@@ -5,6 +5,9 @@ if (process.env.NODE_ENV === 'docker') {
 }
 
 export default {
+
+    // clock data
+
     utcOffset: 0,
     colors: {
         inner: [ 230 , 100, 50 ],
@@ -30,7 +33,7 @@ export default {
         WS_PORT: 8088
     },
 
-    // internal stuff
+    // internal
 
     interval: 1000,
     outerPixelCount: 58,
@@ -39,7 +42,7 @@ export default {
     zeroColor: [ 0, 0, 0],
     network: {
         websocketPort: 8088,
-        ssid: 'QCLOCK',
+        ssid: 'QCLOCK-dev',
         security: '',
         password: '',
         port

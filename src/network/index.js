@@ -36,7 +36,6 @@ export default class Network extends EventEmitter {
         if (this.created) return
 
         log.info('Creating network...')
-
         let { ssid, password, security } = this.store.getState().network
 
         this.network.ap.create({

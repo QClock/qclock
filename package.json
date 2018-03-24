@@ -8,7 +8,7 @@
         "start": "docker-compose up -d",
         "stop": "docker-compose down",
         "deploy": "npm run erase ; export NODE_ENV=production; npm run build && cd build/ && npm run t2push",
-        "device": "export NODE_ENV=development; npm run build && cd build/ && npm run t2run",
+        "device": "export NODE_ENV=production; npm run build && cd build/ && npm run t2run",
         "cleanup": "rm -rf build; mkdir build",
         "erase": "t2 erase",
         "prestart": "export NODE_ENV=docker; npm run build",

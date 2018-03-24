@@ -26,6 +26,8 @@ net.on(Network.READY, () => {
     server.start()
 })
 
-clockwork.start(() => clockface.render())
+clockwork.start(() => {
+    clockface.render()
+})
 
 
