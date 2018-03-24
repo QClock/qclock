@@ -4,7 +4,6 @@ export const SET_TIME = 'SET_TIME';
 export const SET_COLORS = 'SET_COLORS';
 export const SET_DIM = 'SET_DIM';
 export const SET_TIMEZONE = 'SET_TIMEZONE';
-export const SET_UTCOFFSET = 'SET_UTCOFFSET';
 export const SET_ADVANCED = 'SET_ADVANCED';
 
 export function setNetwork (network) {
@@ -40,13 +39,6 @@ export function setTimeZone (timezone) {
         type: SET_TIMEZONE,
         timezone
     };
-}
-
-export function setUtcOffset (utcOffset) {
-    return {
-        type: SET_UTCOFFSET,
-        utcOffset
-    }
 }
 
 export function setAdvanced (advanced) {

@@ -12,7 +12,8 @@ export default function colors (store, request, response) {
     log.info('datetime', method)
 
     if (method === 'GET') {
-        return response.end(JSON.stringify(store.getState().timezone))
+        const timezone = store.getState().timezone
+        return response.end(JSON.stringify({ timezone }))
     }
 
     if (method === 'PUT') {
@@ -23,7 +24,7 @@ export default function colors (store, request, response) {
                 return response.end()
             }
 
-            store.dispatch(actions.setTimeZone(body))
+            store.dispatch(actions.setTimeZone(body.timezone))
             return response.end(JSON.stringify({success: true}))
         })
     }

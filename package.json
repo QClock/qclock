@@ -7,6 +7,7 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "start": "docker-compose up -d",
         "stop": "docker-compose down",
+        "logs": "docker-compose logs -f",
         "deploy": "npm run erase ; export NODE_ENV=production; npm run build && cd build/ && npm run t2push",
         "device": "export NODE_ENV=production; npm run build && cd build/ && npm run t2run",
         "cleanup": "rm -rf build; mkdir build",
@@ -41,7 +42,7 @@
         "ws": "4.1.0"
     },
     "devDependencies": {
-        "@qclock/client-aurora": "1.2.3",
+        "@qclock/client-aurora": "1.3.0",
         "babel-cli": "6.26.0",
         "babel-plugin-transform-class-properties": "6.24.1",
         "babel-preset-env": "1.6.1",

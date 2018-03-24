@@ -12,7 +12,8 @@ export default function colors (store, request, response) {
     log.info('datetime', method)
 
     if (method === 'GET') {
-        return response.end(JSON.stringify({time: store.getState().datetime }))
+        const time = store.getState().datetime
+        return response.end(JSON.stringify({ time }))
     }
 
     if (method === 'PUT') {

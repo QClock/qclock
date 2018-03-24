@@ -8,7 +8,6 @@ export default {
 
     // clock data
 
-    utcOffset: 0,
     colors: {
         inner: [ 230 , 100, 50 ],
         outer: [ 130 , 100, 50 ]
@@ -20,7 +19,7 @@ export default {
         level: 30,
         active: false
     },
-    timezone: 1,
+    timezone: 'Europe/Budapest',
     advanced: {
         useSocket: false
     },
@@ -35,6 +34,7 @@ export default {
 
     // internal
 
+    utcOffset: 0,
     interval: 1000,
     outerPixelCount: 58,
     innerPixelCount: 56,
