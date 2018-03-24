@@ -36,7 +36,6 @@
         "body": "5.1.0",
         "dotenv": "5.0.0",
         "node-fadecandy": "2.0.4",
-        "npm-lifecycle-test": "1.0.0",
         "pino": "4.10.4",
         "redux": "3.7.2",
         "ws": "4.1.0"
