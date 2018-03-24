@@ -42,7 +42,7 @@ export default {
     zeroColor: [ 0, 0, 0],
     network: {
         websocketPort: 8088,
-        ssid: 'QCLOCK-dev',
+        ssid: 'QCLOCK',
         security: '',
         password: '',
         port

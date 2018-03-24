@@ -36,6 +36,7 @@
     "dependencies": {
         "body": "5.1.0",
         "dotenv": "5.0.0",
+        "moment-timezone": "0.5.14",
         "node-fadecandy": "2.0.4",
         "pino": "4.10.4",
         "redux": "3.7.2",

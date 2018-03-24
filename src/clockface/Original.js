@@ -29,7 +29,7 @@ export default class Original extends ClockFaceAbstract {
         return Buffer.concat(unitsArray)
     }
 
-    getInnerPixels (date) {
+    getInnerPixels () {
 
         const { colors, innerPixelCount, zeroColor } = this.store.getState();
         const color = colors.inner

@@ -1,12 +1,17 @@
 import log from '../log'
 import * as actions from '../actions'
 
+import moment from 'moment-timezone'
+
+
+
+
 export default class Time {
 
     constructor (store) {
         this.store = store
-        this.currentOffset = this.store.getState().utcOffset;
-        this.currentDate = this.store.getState().datetime;
+        this.currentOffset = this.store.getState().utcOffset
+        this.currentDate = this.store.getState().datetime
         this.store.subscribe(() => this.update())
     }
 
@@ -17,7 +22,7 @@ export default class Time {
         } = this.store.getState()
 
         let time = new Date( +(new Date()) + utcOffset)
-        time.setHours(time.getHours() + timezone)
+        time = moment(time).tz(timezone)
 
         return time;
     }
@@ -25,9 +30,9 @@ export default class Time {
     update () {
         const { datetime, utcOffset } = this.store.getState()
 
-        if (this.currentDate === datetime) return;
+        if (this.currentDate === datetime) return
 
-        this.currentDate = datetime;
+        this.currentDate = datetime
 
         const newUtcOffset = getTimeOffset(datetime)
         this.store.dispatch(actions.setUtcOffset(newUtcOffset))
@@ -44,5 +49,5 @@ const getTimeOffset = function (year, month, day, hour, minute) {
         incoming = new Date(year, month-1, day, hour, minute)
     }
 
-    return incoming - current;
+    return incoming - current
 }
