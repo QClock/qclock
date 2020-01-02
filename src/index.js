@@ -2,6 +2,7 @@ import './env'
 
 import log from './log'
 import store from './store'
+import * as actions from './actions'
 
 import Server from './server'
 import Network from './network'
@@ -27,7 +28,9 @@ net.on(Network.READY, () => {
 })
 
 clockwork.start(() => {
-    clockface.render()
+    const data = clockface.render()
+    store.dispatch(actions.tick(data))
+    return data
 })
 
 

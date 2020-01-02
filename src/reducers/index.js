@@ -42,7 +42,10 @@ export default function reducer (state = initialState, action) {
             return Object.assign({}, state, {
                 advanced: action.advanced
             });
-
+        case actions.TICK:
+            return Object.assign({}, state, {
+                renderedClockData: action.renderedClockData
+            });
         default:
             return state;
     }

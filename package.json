@@ -12,7 +12,6 @@
         "device": "export NODE_ENV=development; npm run build && cd build/ && npm run t2run",
         "cleanup": "rm -rf build; mkdir build",
         "erase": "t2 erase",
-        "prestart": "export NODE_ENV=docker; npm run build",
         "pret2push": "npm run install-prod",
         "pret2run": "npm run install-prod",
         "t2push": "t2 push .",
@@ -23,8 +22,9 @@
         "build": "npm run babel",
         "postbuild": "scripts/postbuild.sh",
         "babel": "babel src --out-dir build",
-        "serve-docker": "npm i -g npm@5 && npx nodemon build/index.js",
-        "watch-docker": "npx watch 'npm run babel' ./src"
+        "predocker": "scripts/setup-docker.sh",
+        "docker": "npx nodemon --exec babel-node src/index.js",
+        "docker-ssh": "docker-compose run qclock /bin/sh"
     },
     "repository": "https://github.com/necccc/QTime.git",
     "keywords": [
@@ -36,13 +36,20 @@
     "dependencies": {
         "body": "5.1.0",
         "dotenv": "5.0.0",
+        "esm": "^3.2.25",
         "moment-timezone": "0.5.14",
         "node-fadecandy": "2.0.4",
         "pino": "4.10.4",
         "redux": "3.7.2",
+        "usb": "^1.6.2",
         "ws": "4.1.0"
     },
     "devDependencies": {
+        "@babel/cli": "^7.7.7",
+        "@babel/core": "^7.7.7",
+        "@babel/node": "^7.7.7",
+        "@babel/plugin-proposal-class-properties": "^7.7.4",
+        "@babel/preset-env": "^7.7.7",
         "@qclock/client-aurora": "1.3.1",
         "babel-cli": "6.26.0",
         "babel-plugin-transform-class-properties": "6.24.1",
@@ -56,7 +63,8 @@
     "nodemonConfig": {
         "ignore": [
             "test/*",
-            "docs/*"
+            "docs/*",
+            "browser-vis/*"
         ],
         "delay": "2000"
     },

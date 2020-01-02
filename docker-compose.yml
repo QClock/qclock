@@ -2,8 +2,8 @@
 version: '2'
 
 services:
-  serve:
-    image: node:6-alpine
+  qclock:
+    image: node:8.11.3-alpine
     volumes:
     - .:/usr/src/app
     ports:
@@ -12,11 +12,4 @@ services:
     working_dir: /usr/src/app
     environment:
     - NODE_ENV=docker
-    command: ["npm", "run", "serve-docker"]
-
-  watch:
-    image: node:9-alpine
-    volumes:
-    - .:/usr/src/app
-    working_dir: /usr/src/app
-    command: ["npm", "run", "watch-docker"]
+    command: ["npm", "run", "docker"]

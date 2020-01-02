@@ -1,38 +1,38 @@
 
 
-            function display (intArray) {
-                var pixels = [];
+function display (intArray) {
+    var pixels = [];
 
-                intArray.forEach(function (val, i) {
-                    if (i > 0 && i % 3 == 0) {
-                        pixels.push([intArray[i-3],intArray[i-2], intArray[i-1]])
-                    }
-                });
+    intArray.forEach(function (val, i) {
+        if (i > 0 && i % 3 == 0) {
+            pixels.push([intArray[i-3],intArray[i-2], intArray[i-1]])
+        }
+    });
 
-                console.log(pixels.length)
-
-
-                pixels.forEach(function (p, i) {
-                    var elem = $('.pixel.p--' + i +' span')
-
-                    var style = {
-                        'background-color': 'rgb(' + [p[1], p[0], p[2]].join(',') + ')',
-                        'box-shadow': '0 -5px 32px 5px rgba(' + [p[1], p[0], p[2]].join(',') + ',1)'
-                    }
+    console.log(pixels.length)
 
 
-                    if (p[1] == 0 && p[0] == 0 && p[2] == 0) {
-                        style = {
-                            'background-color': 'white',
-                            'box-shadow': '0 0 14px 3px white'
-                        }
-                    }
+    pixels.forEach(function (p, i) {
+        var elem = $('.pixel.p--' + i +' span')
 
-                    elem.css(style);
+        var style = {
+            'background-color': 'rgb(' + [p[1], p[0], p[2]].join(',') + ')',
+            'box-shadow': '0 -5px 32px 5px rgba(' + [p[1], p[0], p[2]].join(',') + ',1)'
+        }
 
-                })
 
+        if (p[1] == 0 && p[0] == 0 && p[2] == 0) {
+            style = {
+                'background-color': 'white',
+                'box-shadow': '0 0 14px 3px white'
             }
+        }
+
+        elem.css(style);
+
+    })
+
+}
 
 
 
@@ -66,13 +66,13 @@ for (;p >= 0 ; p--) {
 
 }
 
-            var ws = new WebSocket('ws://127.0.0.1:8080/');
+var ws = new WebSocket('ws://127.0.0.1:8088/');
 
-            ws.addEventListener('message', function (e) {
-                var fileReader = new FileReader();
-                fileReader.onload = function() {
-                    display(new Uint8Array(this.result));
-                };
-                fileReader.readAsArrayBuffer(e.data);
-            })
+ws.addEventListener('message', function (e) {
+    var fileReader = new FileReader();
+    fileReader.onload = function() {
+        display(new Uint8Array(this.result));
+    };
+    fileReader.readAsArrayBuffer(e.data);
+})
 

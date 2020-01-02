@@ -18,6 +18,7 @@ export default class Clockface {
     render () {
         const data = this.current.render(this.time.current)
         this.npx.send(data)
+        return data
     }
 
     get list () {

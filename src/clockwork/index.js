@@ -44,7 +44,7 @@ export default class ClockWork {
         this.run(next)
     }
 
-    run (next) {
+    run () {
         const { interval } = this.store.getState()
         this.tick_interval = setInterval(() => {
             if (!this.paused) this.callback()

@@ -73,6 +73,12 @@ module.exports = class Server extends HttpServer {
 
             routes.socket(this.store, data)
         })
+
+        this.store.subscribe((...args) => {
+            console.log(args)
+            const { renderedClockData } = this.store.getState()
+            ws.send(renderedClockData);
+        })
     }
 
     __onRequest (request, response) {
