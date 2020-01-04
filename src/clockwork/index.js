@@ -16,7 +16,6 @@ const needImmediateTick = function (newState, oldState) {
 }
 
 export default class ClockWork {
-
     constructor (store) {
         this.store = store
         this.tick_interval = 0
@@ -32,10 +31,9 @@ export default class ClockWork {
         const state = this.store.getState()
 
         if (needImmediateTick(state, this.currentState)) {
+            this.currentState = state
             this.now(this.callback)
         }
-
-        this.currentState = state
     }
 
     start (next) {

@@ -74,11 +74,22 @@ module.exports = class Server extends HttpServer {
             routes.socket(this.store, data)
         })
 
-        this.store.subscribe((...args) => {
-            console.log(args)
+        const unsubscribe = this.store.subscribe((...args) => {
             const { renderedClockData } = this.store.getState()
-            ws.send(renderedClockData);
+
+            try {
+                ws.send(renderedClockData);
+            } catch(e) {
+                console.log('could not send')
+            }
         })
+
+        ws.on('close', () => {
+            console.log('ws connection closed, unsubscribe from store')
+            unsubscribe()
+        })
+
+
     }
 
     __onRequest (request, response) {

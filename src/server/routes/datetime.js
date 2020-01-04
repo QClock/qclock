@@ -23,7 +23,6 @@ export default function colors (store, request, response) {
                 response.statusCode = 500
                 return response.end()
             }
-
             store.dispatch(actions.setTime(body.time))
             return response.end(JSON.stringify({success: true}))
         })

@@ -39,7 +39,7 @@ export default {
     outerPixelCount: 58,
     innerPixelCount: 56,
     stubPixelCount: 6,
-    zeroColor: [ 0, 0, 0],
+    zeroColor: [ 0, 0, 0 ],
     network: {
         websocketPort: 8088,
         ssid: 'QCLOCK',

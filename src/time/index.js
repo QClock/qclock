@@ -3,16 +3,12 @@ import * as actions from '../actions'
 
 import moment from 'moment-timezone'
 
-
-
-
 export default class Time {
 
     constructor (store) {
         this.store = store
-        this.currentOffset = this.store.getState().utcOffset
         this.currentDate = this.store.getState().datetime
-        this.store.subscribe(() => this.update())
+        this.store.subscribe((...args) => this.update(...args))
     }
 
     get current () {
@@ -31,10 +27,11 @@ export default class Time {
         const { datetime, utcOffset } = this.store.getState()
 
         if (this.currentDate === datetime) return
-
         this.currentDate = datetime
 
         const newUtcOffset = getTimeOffset(datetime)
+        if (newUtcOffset === utcOffset) return
+
         this.store.dispatch(actions.setUtcOffset(newUtcOffset))
     }
 }
