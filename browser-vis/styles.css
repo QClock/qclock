@@ -27,6 +27,18 @@
     top: 0;
 }
 
+.pixel em {
+    position: absolute;
+    top: -11px;
+    font-family: sans-serif;
+    font-size: 9px;
+    font-style: normal;
+}
+
+.pixel.inner em {
+    top: 38px;
+}
+
 .pixel.inner span {
     transform: rotate(180deg);
     top: 30px;
@@ -58,4 +70,72 @@
     filter: blur(20px);
     opacity: .6;
     margin-top: 15px;
+}
+
+
+
+.pixels .line,
+.pixels .line::after,
+.pixels .line::before {
+    position: absolute;
+    width: 1px;
+    height: 125%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 50%;
+    background-color: aquamarine;
+}
+
+.pixels .line::after,
+.pixels .line::before {
+    content: '';
+}
+
+.pixels .line.horizontal {
+    transform: translateY(-50%) rotate(90deg);
+}
+
+
+.pixels .line.vertical::after {
+    transform: translateY(-50%) rotate(60deg);
+}
+
+.pixels .line.vertical::before {
+    transform: translateY(-50%) rotate(-60deg);
+}
+
+.pixels .line.horizontal::after {
+    transform: translateY(-50%) rotate(60deg);
+}
+
+.pixels .line.horizontal::before {
+    transform: translateY(-50%) rotate(-60deg);
+}
+
+
+
+.controls {
+    position: absolute;
+    font-family: monospace;
+    font-size: 24px;
+    left: 50%;
+    top: 64px;
+    transform: translateX(-50%);
+}
+
+.controls input {
+    display: inline-block;
+    height: 48px;
+    font-size: 24px;
+    text-align: center;
+    width: 60px;
+    padding: 0 0 0px 12px;
+    font-family: monospace;
+}
+
+.controls input:first-child {
+    transform: translateX(7px);
+}
+.controls input:last-child {
+    transform: translateX(-7px);
 }

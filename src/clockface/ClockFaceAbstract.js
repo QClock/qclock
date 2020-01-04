@@ -14,9 +14,9 @@ export default class ClockFaceAbstract {
 
     getBuffer (next) {
         return Buffer.concat([
-            this.getOuterPixels(),
-            this.getStubPixels(),
-            this.getInnerPixels()
+            this.getOuterPixels(), // 58 pixels +
+            this.getStubPixels(), // 6 pixels +
+            this.getInnerPixels() // 56 pixels +
         ])
     }
 
@@ -53,7 +53,7 @@ export default class ClockFaceAbstract {
     getHourPixel () {
         const { innerPixelCount } = this.store.getState();
         let hours = this.date.hours()
-        let minutes = this.date.hours()
+        let minutes = this.date.minutes()
         let actual = 0
 
         // by default we use 12-hour format
@@ -65,9 +65,13 @@ export default class ClockFaceAbstract {
             hours = 12;
         }
 
-        hours = hours + minutes / 60
-        actual = Math.round( ( innerPixelCount / 12 ) * ( hours ) ) - 1
+        console.log('hours', hours);
 
+        hours = hours + minutes / 60
+
+        actual = Math.round( ( innerPixelCount / 12 ) * ( hours ) )
+
+        console.log('actual 1', actual);
         // the brainf*ck below is needed because the led strip is:
         //     a/ in reverse order on the inner side
         //     b/ starts index 0 at the bottom, near the 6-hour mark
@@ -80,6 +84,8 @@ export default class ClockFaceAbstract {
         } else if (actual > 27 && 27 - actual < 0) {
             actual = innerPixelCount - 1 - (actual - 27);
         }
+
+        console.log('actual 2', actual, actual + 64);
 
         return actual
     }
