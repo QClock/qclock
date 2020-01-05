@@ -40,8 +40,13 @@ export default class ClockFaceAbstract {
         // get the actual pixel that closest to the current minute
         let actual = Math.round(( outerPixelCount / 60 ) * this.date.minutes() )
 
-        // the 0 is the 28th index on OUTER
-        actual = actual + 29
+        // the 0 is the 27th index on OUTER
+        actual = actual + 28
+
+        // minor corrections on actual pixel positions
+        if (this.date.minutes() > 15 && this.date.minutes() <= 30) {
+            actual += 1
+        }
 
         if (actual >= outerPixelCount) {
             actual = actual - outerPixelCount
@@ -65,27 +70,39 @@ export default class ClockFaceAbstract {
             hours = 12;
         }
 
-        console.log('hours', hours);
+        // 48 units:
+        // 12 hours plus 3 partial for every hour
+        // 4 unit * 12
 
-        hours = hours + minutes / 60
+        // a whole hour unit is divisible by 4
+        // 4 -> 1
+        // 8 -> 2
+        // 12 -> 3
+        // etc
 
-        actual = Math.round( ( innerPixelCount / 12 ) * ( hours ) )
+        const units = (hours * 4) + ((minutes / 60) * 4)
 
-        console.log('actual 1', actual);
+        // innerPixelCount / 48 = 1.16
+        actual = Math.ceil( ( innerPixelCount / 48 ) * ( units ) )
+
+        // console.log('inner pixels, zero based: ', actual);
+
         // the brainf*ck below is needed because the led strip is:
         //     a/ in reverse order on the inner side
         //     b/ starts index 0 at the bottom, near the 6-hour mark
 
-        // the hour-0 is the 27th index on INNER
-        if (actual < 27) {
-            actual = 27 - actual
-        } else if (27 - actual == 0) {
+        // the hour-0 is the 29th index on INNER
+        const zeroPixel = 28
+
+        if (actual < zeroPixel) {
+            actual = zeroPixel - actual
+        } else if (zeroPixel - actual == 0) {
             actual = 55
-        } else if (actual > 27 && 27 - actual < 0) {
-            actual = innerPixelCount - 1 - (actual - 27);
+        } else if (actual > zeroPixel && zeroPixel - actual < 0) {
+            actual = innerPixelCount - 1 - (actual - zeroPixel);
         }
 
-        console.log('actual 2', actual, actual + 64);
+        // console.log('final pixel position', actual, actual + 64);
 
         return actual
     }

@@ -15,13 +15,9 @@ function display (intArray) {
         }
     });
 
-// does not count 6 stub pixels !!!!!
-
     pixels.forEach(function (p, i) {
-        //console.log('pixel', i);
 
         const elem = $('.pixel.p--' + i +' span')
-
 
         let style = {
             'background-color': 'rgb(' + [p[1], p[0], p[2]].join(',') + ')',
@@ -119,4 +115,3 @@ const setTime = () => {
 
 document.querySelector('.hours').addEventListener('change', setTime)
 document.querySelector('.minutes').addEventListener('change', setTime)
-
