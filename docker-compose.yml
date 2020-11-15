@@ -3,7 +3,7 @@ version: '2'
 
 services:
   serve:
-    image: node:6-alpine
+    image: node:10.22-alpine
     volumes:
     - .:/usr/src/app
     ports:
@@ -15,7 +15,7 @@ services:
     command: ["npm", "run", "serve-docker"]
 
   watch:
-    image: node:9-alpine
+    image: node:alpine
     volumes:
     - .:/usr/src/app
     working_dir: /usr/src/app
