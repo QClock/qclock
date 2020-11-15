@@ -16,12 +16,14 @@
         "pret2run": "npm run install-prod",
         "t2push": "t2 push .",
         "t2run": "t2 run .",
-        "config": "node tools/setconfig.js",
         "install-prod": "npm i --only=prod",
+
         "prebuild": "scripts/prebuild.sh",
         "build": "npm run babel",
         "postbuild": "scripts/postbuild.sh",
+
         "babel": "babel src --out-dir build",
+
         "predocker": "scripts/setup-docker.sh",
         "docker": "npx nodemon --exec babel-node src/index.js",
         "docker-ssh": "docker-compose run qclock /bin/sh"
@@ -38,7 +40,7 @@
         "dotenv": "5.0.0",
         "esm": "^3.2.25",
         "moment-timezone": "0.5.14",
-        "node-fadecandy": "2.0.4",
+        "node-fadecandy": "2.0.5",
         "pino": "4.10.4",
         "redux": "3.7.2",
         "usb": "^1.6.2",
