@@ -1,8 +1,4 @@
-let port = 80
-
-if (process.env.NODE_ENV === 'docker') {
-    port = 9090
-}
+let port = 8080
 
 export default {
 
@@ -36,7 +32,7 @@ export default {
 
     utcOffset: 0,
     interval: 1000,
-    outerPixelCount: 58,
+    outerPixelCount: 56,
     innerPixelCount: 56,
     stubPixelCount: 6,
     zeroColor: [ 0, 0, 0],
@@ -46,5 +42,6 @@ export default {
         security: '',
         password: '',
         port
-    }
+    },
+    pixels: new Uint32Array( 112 )
 }

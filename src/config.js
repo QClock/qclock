@@ -1,16 +1,12 @@
-
-var packagejson = require('./package.json')
-var tessel = true;
-var port = 80
-var skip_facedandy = false
+const packagejson = require('./package.json')
+const port = 80
 
 if (process.env.QTEST) {
-    tessel = false;
     port = 8889
     skip_facedandy = true
 }
 
-module.exports = {
+export default {
 
     USE_ADMIN: true,
     USE_NETWORK: true,
@@ -23,7 +19,7 @@ module.exports = {
     TIMEZONE_OFFSET: 2,
     HW_LAG: 0,
 
-    OUTER: 58,
+    OUTER: 56,
     INNER: 56,
 
     OUTER_COLOR: [255,0,228], // pink RGB

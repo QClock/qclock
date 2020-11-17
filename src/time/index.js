@@ -1,10 +1,13 @@
 import log from '../log'
 import * as actions from '../actions'
 
-import moment from 'moment-timezone'
+import dayjs from 'dayjs'
 
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
 
-
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 export default class Time {
 
@@ -22,7 +25,7 @@ export default class Time {
         } = this.store.getState()
 
         let time = new Date( +(new Date()) + utcOffset)
-        time = moment(time).tz(timezone)
+        time = dayjs(time).tz(timezone)
 
         return time;
     }

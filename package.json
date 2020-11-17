@@ -18,7 +18,7 @@
         "postbuild": "scripts/postbuild.sh",
         "babel": "babel src --out-dir build",
         "serve-docker": "npm i -g npm@5 && npx nodemon build/index.js",
-        "watch-docker": "npx watch 'npm run babel' ./src"
+        "watch": "npx watch 'npm run babel' ./src"
     },
     "repository": "https://github.com/necccc/QTime.git",
     "keywords": [
@@ -28,10 +28,12 @@
     ],
     "dependencies": {
         "body": "^5.1.0",
-        "datejs": "^1.0.0-rc3",
+        "dayjs": "^1.9.6",
         "dotenv": "^8.2.0",
         "pino": "^6.7.0",
+        "pino-pretty": "^4.3.0",
         "redux": "^4.0.5",
+        "rpi-ws281x-native": "^0.10.0",
         "ws": "^7.4.0"
     },
     "devDependencies": {

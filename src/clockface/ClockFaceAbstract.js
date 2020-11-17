@@ -26,7 +26,7 @@ export default class ClockFaceAbstract {
 
         if (
             dim.active &&
-            (this.date.hours() > dim.from || this.date.hours() < dim.to)
+            (this.date.hour() > dim.from || this.date.hour() < dim.to)
         ) {
             let lightness = Math.round((dim.level / 100) * 50)
             rgbColor = hsl2rgb(hslColor[0], hslColor[1], lightness)
@@ -38,7 +38,7 @@ export default class ClockFaceAbstract {
     getMinutePixel () {
         const { outerPixelCount } = this.store.getState();
         // get the actual pixel that closest to the current minute
-        let actual = Math.round(( outerPixelCount / 60 ) * this.date.minutes() )
+        let actual = Math.round(( outerPixelCount / 60 ) * this.date.minute() )
 
         // the 0 is the 28th index on OUTER
         actual = actual + 29
@@ -52,8 +52,8 @@ export default class ClockFaceAbstract {
 
     getHourPixel () {
         const { innerPixelCount } = this.store.getState();
-        let hours = this.date.hours()
-        let minutes = this.date.hours()
+        let hours = this.date.hour()
+        let minutes = this.date.hour()
         let actual = 0
 
         // by default we use 12-hour format

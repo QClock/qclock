@@ -30,7 +30,7 @@ module.exports = class Server extends HttpServer {
         this.__cache = {}
         this.wsConnections = new Set()
 
-        this.on('request', (request, response) => this.__onRequest(request, response))
+        //this.on('request', (request, response) => this.__onRequest(request, response))
         this.on('clientError', exception => this.__onError(exception))
     }
 
@@ -39,15 +39,18 @@ module.exports = class Server extends HttpServer {
 
         const network = this.store.getState().network
 
-        this.listen(network.port, '0.0.0.0')
         this.wss = new WebSocket.Server({
-            host: '0.0.0.0',
-            port: network.websocketPort
+            server: this
         })
 
         this.wss.on('connection', (ws) => this.onSocketConnection(ws))
         this.wss.on('error', (err) => log.error(err))
-        this.wss.on('listening', () => log.info('WS listening', this.wss.address()))
+        this.wss.on('listening', () => {
+            const { address, port } = this.wss.address()
+            log.info(`WS listening ${address}:${port}`)
+        })
+
+        this.listen(network.port, '0.0.0.0')
         this.opened = true
     }
 
@@ -61,7 +64,12 @@ module.exports = class Server extends HttpServer {
     onSocketConnection (ws) {
         log.info('new websocket connection')
 
+        const unsubscribe = this.store.subscribe(() => {
+            ws.send(this.store.pixels)
+        })
+
         ws.on('error', (err) => log.error(err))
+        ws.on('close', unsubscribe)
 
         ws.on('message', (message) => {
             let data = {}
@@ -73,6 +81,8 @@ module.exports = class Server extends HttpServer {
 
             routes.socket(this.store, data)
         })
+
+
     }
 
     __onRequest (request, response) {
@@ -91,6 +101,8 @@ module.exports = class Server extends HttpServer {
             return response.end(this.__cache[request.url])
         }
 
+
+        console.log('__onRequest', url)
         const assetRequest = /\.\w*$/.test(url.pathname)
 
         if (!assetRequest) {

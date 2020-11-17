@@ -1,5 +1,7 @@
 import EventEmitter from 'events'
 import log from '../log'
+import config from '../config'
+import ws281x from 'rpi-ws281x-native'
 
 export default class NeoPixels extends EventEmitter {
 
@@ -7,32 +9,29 @@ export default class NeoPixels extends EventEmitter {
         super()
 
         this.ready = false
+        this.ws281x = ws281x
 
-        if (process.env.NODE_ENV !== 'docker') {
-            const FadeCandy = require('node-fadecandy')
-            this.fadecandy = new FadeCandy()
-            this.fadecandy.on(FadeCandy.events.READY, (...args) => {
-                log.info("FadeCandy ready")
-                //fadecandy.config.set(fadecandy.Configuration.schema.DISABLE_KEYFRAME_INTERPOLATION, 1)
-                this.fadecandy.clut.create()
-            })
-            this.fadecandy.on(FadeCandy.events.COLOR_LUT_READY, (...args) => {
-                log.info('LUT READY')
-                this.ready = true
-            })
-        }
+        //const pixelData = new Uint32Array(num_leds)
+
+        this.ws281x.init(config.OUTER + config.INNER)
+
+        // ---- trap the SIGINT and reset before exit
+        process.on('SIGINT', () => {
+            this.ws281x.reset()
+            process.nextTick(() => { process.exit(0) })
+        });
+
     }
 
     send (data) {
-        if (this.ready && this.fadecandy) {
-            this.fadecandy.send(data)
+        if (this.ready && this.ws281x) {
+            this.ws281x.render(data);
         }
     }
 
     clear () {
-        let data = new Uint8Array((config.OUTER + config.INNER + 6) * 3);
+        let data = new Uint32Array((config.OUTER + config.INNER + 6) * 3);
         data.fill(0)
         this.send(data)
     }
-
 }

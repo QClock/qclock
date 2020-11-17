@@ -6,6 +6,7 @@ export const SET_DIM = 'SET_DIM';
 export const SET_TIMEZONE = 'SET_TIMEZONE';
 export const SET_UTCOFFSET = 'SET_UTCOFFSET';
 export const SET_ADVANCED = 'SET_ADVANCED';
+export const SET_PIXELS = 'SET_PIXELS';
 
 export function setNetwork (network) {
     return {
@@ -54,5 +55,13 @@ export function setAdvanced (advanced) {
     return {
         type: SET_ADVANCED,
         advanced
+    }
+}
+
+
+export function setPixels (pixels) {
+    return {
+        type: SET_PIXELS,
+        pixels
     }
 }

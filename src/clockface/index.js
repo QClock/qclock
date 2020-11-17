@@ -1,13 +1,13 @@
 import Original from './Original'
-import NeoPixels from './../neopixels'
-
+import * as actions from '../actions'
 
 export default class Clockface {
 
-    constructor (store, time) {
+    constructor (store, time, neopixels) {
 
-        this.npx = new NeoPixels();
+        this.npx = neopixels
         this.time = time
+        this.store = store
         this.clockfaceList = [
             new Original(store),
         ]
@@ -17,6 +17,8 @@ export default class Clockface {
 
     render () {
         const data = this.current.render(this.time.current)
+
+        this.store.dispatch(actions.setPixels(data))
         this.npx.send(data)
     }
 

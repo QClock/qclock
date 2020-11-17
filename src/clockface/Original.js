@@ -1,32 +1,36 @@
 
-
-import ClockFaceAbstract from './ClockFaceAbstract'
-
 const OUTERCOLOR = 'outerColor'
 const INNERCOLOR = 'innerColor'
 
-export default class Original extends ClockFaceAbstract {
+// outer, minutes first, then inner, hours
+
+export default class Original {
+
+
+    constructor (store) {
+        this.store = store
+    }
+
+    render (date) {
+        this.date = date
+        return this.getBuffer()
+    }
+
+    getBuffer (next) {
+        return Buffer.concat([
+            this.getOuterPixels(),
+            this.getInnerPixels()
+        ])
+    }
 
     getOuterPixels () {
 
         const { colors, outerPixelCount, zeroColor } = this.store.getState();
         const color = colors.outer
 
-        let unitsArray = new Array(outerPixelCount),
-            actual = this.getMinutePixel(),
-            index = 0,
-            buf;
+        console.log('getOuterPixels', this.getMinutePixel())
 
-        for (; index < outerPixelCount ; index++ ) {
-            if (index == actual) {
-                buf = new Buffer(this.getColor(color))
-            } else {
-                buf = new Buffer(zeroColor)
-            }
-            unitsArray[index] = buf;
-        }
-
-        return Buffer.concat(unitsArray)
+        return Buffer.concat([])
     }
 
     getInnerPixels () {
@@ -34,21 +38,47 @@ export default class Original extends ClockFaceAbstract {
         const { colors, innerPixelCount, zeroColor } = this.store.getState();
         const color = colors.inner
 
-        let unitsArray = new Array(innerPixelCount),
-            actual = this.getHourPixel(),
-            index = 0,
-            buf;
+        console.log('getInnerPixels', this.getHourPixel())
 
-        for (; index < innerPixelCount; index++ ) {
-            if (index == actual) {
-                buf = new Buffer(this.getColor(color))
-            } else {
-                buf = new Buffer(zeroColor)
-            }
-            unitsArray[index] = buf;
+        return Buffer.concat([])
+    }
+
+    getHourPixel () {
+        const { innerPixelCount } = this.store.getState();
+
+        const hour24 = this.date.hour()
+        let hour12 = hour24
+
+        if (hour12 > 12) {
+            hour12 = hour24 - 12
         }
 
-        return Buffer.concat(unitsArray)
+        const hourPixel = Math.round((innerPixelCount / 12) * hour12)
+        const hourFragmentPixel = Math.floor(((innerPixelCount / 12) / 60) * this.date.minute())
+
+// mindez igaz, ha fentrol indulna a nulla, de alulrol teszi
+
+        return hourPixel + hourFragmentPixel
+    }
+
+    getMinutePixel () {
+        const { outerPixelCount } = this.store.getState();
+        return Math.ceil((outerPixelCount / 60) * this.date.minute())
+    }
+
+    getColor (hslColor) {
+        let rgbColor = hsl2rgb(...hslColor)
+        const { dim } = this.store.getState()
+
+        if (
+            dim.active &&
+            (this.date.hour() > dim.from || this.date.hour() < dim.to)
+        ) {
+            let lightness = Math.round((dim.level / 100) * 50)
+            rgbColor = hsl2rgb(hslColor[0], hslColor[1], lightness)
+        }
+
+        return rgbColor
     }
 
 }

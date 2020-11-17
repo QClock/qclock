@@ -43,6 +43,11 @@ export default function reducer (state = initialState, action) {
                 advanced: action.advanced
             });
 
+        case actions.SET_PIXELS:
+            return Object.assign({}, state, {
+                pixels: action.pixels
+            });
+
         default:
             return state;
     }
