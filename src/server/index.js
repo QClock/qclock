@@ -65,7 +65,7 @@ module.exports = class Server extends HttpServer {
         log.info('new websocket connection')
 
         const unsubscribe = this.store.subscribe(() => {
-            ws.send(this.store.pixels)
+            ws.send(this.store.getState().pixels)
         })
 
         ws.on('error', (err) => log.error(err))

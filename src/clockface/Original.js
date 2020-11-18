@@ -1,11 +1,6 @@
-
-const OUTERCOLOR = 'outerColor'
-const INNERCOLOR = 'innerColor'
-
-// outer, minutes first, then inner, hours
+import hsl2int from '../lib/hsl2int'
 
 export default class Original {
-
 
     constructor (store) {
         this.store = store
@@ -17,30 +12,30 @@ export default class Original {
     }
 
     getBuffer (next) {
-        return Buffer.concat([
-            this.getOuterPixels(),
-            this.getInnerPixels()
+        return Uint32Array.from([
+            ...this.getOuterPixels(),
+            ...this.getInnerPixels()
         ])
     }
 
     getOuterPixels () {
-
-        const { colors, outerPixelCount, zeroColor } = this.store.getState();
+        const { colors, outerPixelCount } = this.store.getState();
         const color = colors.outer
+        const output = new Uint32Array(outerPixelCount)
 
-        console.log('getOuterPixels', this.getMinutePixel())
+        output[this.getMinutePixel()] = hsl2int(...this.dim(...color))
 
-        return Buffer.concat([])
+        return output
     }
 
     getInnerPixels () {
-
-        const { colors, innerPixelCount, zeroColor } = this.store.getState();
+        const { colors, innerPixelCount } = this.store.getState();
         const color = colors.inner
+        const output = new Uint32Array(innerPixelCount)
 
-        console.log('getInnerPixels', this.getHourPixel())
+        output[this.getHourPixel()] = hsl2int(...this.dim(...color))
 
-        return Buffer.concat([])
+        return output
     }
 
     getHourPixel () {
@@ -55,19 +50,28 @@ export default class Original {
 
         const hourPixel = Math.round((innerPixelCount / 12) * hour12)
         const hourFragmentPixel = Math.floor(((innerPixelCount / 12) / 60) * this.date.minute())
+        const index = hourPixel + hourFragmentPixel
 
-// mindez igaz, ha fentrol indulna a nulla, de alulrol teszi
-
-        return hourPixel + hourFragmentPixel
+        let rotatedIndex = index + (innerPixelCount / 2)
+        if (rotatedIndex > innerPixelCount) {
+            rotatedIndex = rotatedIndex - innerPixelCount
+        }
+        return rotatedIndex
     }
 
     getMinutePixel () {
         const { outerPixelCount } = this.store.getState();
-        return Math.ceil((outerPixelCount / 60) * this.date.minute())
+        const index = Math.ceil((outerPixelCount / 60) * this.date.minute())
+
+        let rotatedIndex = index + (outerPixelCount / 2)
+        if (rotatedIndex > outerPixelCount) {
+            rotatedIndex = rotatedIndex - outerPixelCount
+        }
+
+        return rotatedIndex
     }
 
-    getColor (hslColor) {
-        let rgbColor = hsl2rgb(...hslColor)
+    dim (h,s,l) {
         const { dim } = this.store.getState()
 
         if (
@@ -75,10 +79,9 @@ export default class Original {
             (this.date.hour() > dim.from || this.date.hour() < dim.to)
         ) {
             let lightness = Math.round((dim.level / 100) * 50)
-            rgbColor = hsl2rgb(hslColor[0], hslColor[1], lightness)
+            return [h, s, lightness]
         }
 
-        return rgbColor
+        return [h,s,l]
     }
-
 }

@@ -5,8 +5,8 @@ export default {
     // clock data
 
     colors: {
-        inner: [ 230 , 100, 50 ],
-        outer: [ 130 , 100, 50 ]
+        inner: [ 230, 100, 50 ],
+        outer: [ 130, 100, 50 ]
     },
     datetime: +new Date(),
     dim: {

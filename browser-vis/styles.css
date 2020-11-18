@@ -27,11 +27,21 @@
     top: 0;
 }
 
+.pixel em {
+    position: absolute;
+    top: -10px;
+    font-style: normal;
+    font-family: monospace;
+    font-size: 8px;
+}
+
 .pixel.inner span {
     transform: rotate(180deg);
     top: 30px;
 }
-
+.pixel.inner em {
+    top: 35px;
+}
 
 .ring {
     border-radius: 100%;

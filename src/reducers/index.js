@@ -5,7 +5,7 @@ import initialState from '../state'
 
 export default function reducer (state = initialState, action) {
 
-    log.info('ACTION', action)
+    log.info(`ACTION ${action.type}`)
 
     switch (action.type) {
         case actions.SET_NETWORK:
