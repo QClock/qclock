@@ -30,7 +30,7 @@ module.exports = class Server extends HttpServer {
         this.__cache = {}
         this.wsConnections = new Set()
 
-        //this.on('request', (request, response) => this.__onRequest(request, response))
+        this.on('request', (request, response) => this.__onRequest(request, response))
         this.on('clientError', exception => this.__onError(exception))
     }
 
@@ -64,8 +64,14 @@ module.exports = class Server extends HttpServer {
     onSocketConnection (ws) {
         log.info('new websocket connection')
 
+        let currentValue
+
         const unsubscribe = this.store.subscribe(() => {
-            ws.send(this.store.getState().pixels)
+            let previousValue = currentValue
+            currentValue = this.store.getState().pixels
+            if (previousValue !== currentValue) {
+                ws.send(this.store.getState().pixels)
+            }
         })
 
         ws.on('error', (err) => log.error(err))

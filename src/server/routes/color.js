@@ -3,16 +3,16 @@ const jsonBody = require("body/json")
 import log from '../../log'
 import * as actions from '../../actions'
 
-export default function colors (store, request, response) {
+export default function color (store, request, response) {
 
     const {
         method
     } = request
 
-    log.info('colors', method)
+    log.info('color', method)
 
     if (method === 'GET') {
-        return response.end(JSON.stringify({colors: store.getState().colors }))
+        return response.end(JSON.stringify({color: store.getState().color }))
     }
 
     if (method === 'PUT') {
@@ -23,22 +23,22 @@ export default function colors (store, request, response) {
                 return response.end()
             }
 
-            const { colors } = body
+            const { color } = body
 
-            if (colors.inner[0] > 360) {
-                colors.inner[0] = 360
+            if (color.hour[0] > 360) {
+                color.hour[0] = 360
             }
 
-            if (colors.outer[0] > 360) {
-                colors.outer[0] = 360
+            if (color.minute[0] > 360) {
+                color.minute[0] = 360
             }
 
-            store.dispatch(actions.setColors(colors))
+            store.dispatch(actions.setColor(color))
             return response.end(JSON.stringify({success: true}))
         })
     }
 
     if (method === 'SOCKET') {
-        store.dispatch(actions.setColors(request.colors))
+        store.dispatch(actions.setColor(request.color))
     }
 }

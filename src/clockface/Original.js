@@ -19,21 +19,21 @@ export default class Original {
     }
 
     getOuterPixels () {
-        const { colors, outerPixelCount } = this.store.getState();
-        const color = colors.outer
+        const { color, outerPixelCount } = this.store.getState();
+        const hsl = color.minute
         const output = new Uint32Array(outerPixelCount)
 
-        output[this.getMinutePixel()] = hsl2int(...this.dim(...color))
+        output[this.getMinutePixel()] = hsl2int(...this.dim(...hsl))
 
         return output
     }
 
     getInnerPixels () {
-        const { colors, innerPixelCount } = this.store.getState();
-        const color = colors.inner
+        const { color, innerPixelCount } = this.store.getState();
+        const hsl = color.hour
         const output = new Uint32Array(innerPixelCount)
 
-        output[this.getHourPixel()] = hsl2int(...this.dim(...color))
+        output[this.getHourPixel()] = hsl2int(...this.dim(...hsl))
 
         return output
     }

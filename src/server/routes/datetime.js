@@ -3,7 +3,7 @@ const jsonBody = require("body/json")
 import log from '../../log'
 import * as actions from '../../actions'
 
-export default function colors (store, request, response) {
+export default function datetime (store, request, response) {
 
     const {
         method

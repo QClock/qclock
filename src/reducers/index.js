@@ -13,9 +13,9 @@ export default function reducer (state = initialState, action) {
                 network: action.network
             });
 
-        case actions.SET_COLORS:
+        case actions.SET_COLOR:
             return Object.assign({}, state, {
-                colors: action.colors
+                color: action.color
             });
 
         case actions.SET_TIME:

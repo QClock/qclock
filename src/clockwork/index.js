@@ -4,7 +4,7 @@ import log from '../log'
 const needImmediateTick = function (newState, oldState) {
     const props = [
         'utcOffset',
-        'colors',
+        'color',
         'dim',
         'timezone'
     ]
@@ -25,10 +25,19 @@ export default class ClockWork {
 
         this.currentState = this.store.getState()
 
-        this.store.subscribe(() => this.update())
+        let currentValue
+
+        this.store.subscribe(() => {
+            let previousValue = currentValue
+            currentValue = this.store.getState().datetime
+            if (previousValue !== currentValue) {
+                this.update()
+            }
+        })
     }
 
     update () {
+        console.log('tick update')
         const state = this.store.getState()
 
         if (needImmediateTick(state, this.currentState)) {

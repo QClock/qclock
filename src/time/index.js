@@ -15,7 +15,16 @@ export default class Time {
         this.store = store
         this.currentOffset = this.store.getState().utcOffset
         this.currentDate = this.store.getState().datetime
-        this.store.subscribe(() => this.update())
+
+        let currentValue
+
+        this.store.subscribe(() => {
+            let previousValue = currentValue
+            currentValue = this.store.getState().datetime
+            if (previousValue !== currentValue) {
+                this.update()
+            }
+        })
     }
 
     get current () {
@@ -31,6 +40,7 @@ export default class Time {
     }
 
     update () {
+        console.log('time update')
         const { datetime, utcOffset } = this.store.getState()
 
         if (this.currentDate === datetime) return

@@ -1,7 +1,7 @@
 const URL = require('url')
 
 import datetime from './datetime'
-import colors from './colors'
+import color from './color'
 import dim from './dim'
 import timezone from './timezone'
 import advanced from './advanced'
@@ -13,9 +13,9 @@ const routes = [
         handler: datetime
     },
     {
-        name: 'colors',
-        path: '/colors',
-        handler: colors
+        name: 'color',
+        path: '/color',
+        handler: color
     },
     {
         name: 'dim',
@@ -63,12 +63,12 @@ export function handle (store, request, response) {
 }
 
 export function socket (store, data) {
-    const handler = routes.reduce((fn, route) => {
-        if (route.name in data) return route.handler
-        return fn
-    }, () => {})
-
-    data.method = 'SOCKET'
-
-    handler(store, data)
+    Object.keys(data).forEach(key => {
+        const handler = routes.reduce((fn, route) => {
+            if (route.name === key) return route.handler
+            return fn
+        }, () => {})
+        data.method = 'SOCKET'
+        handler(store, data)
+    })
 }
