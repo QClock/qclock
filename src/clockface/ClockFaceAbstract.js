@@ -41,7 +41,7 @@ export default class ClockFaceAbstract {
         let actual = Math.round(( outerPixelCount / 60 ) * this.date.minute() )
 
         // the 0 is the 28th index on OUTER
-        actual = actual + 29
+        actual = actual + (outerPixelCount / 2)
 
         if (actual >= outerPixelCount) {
             actual = actual - outerPixelCount

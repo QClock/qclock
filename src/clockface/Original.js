@@ -52,8 +52,8 @@ export default class Original {
         const hourFragmentPixel = Math.floor(((innerPixelCount / 12) / 60) * this.date.minute())
         const index = hourPixel + hourFragmentPixel
 
-        let rotatedIndex = index + (innerPixelCount / 2)
-        if (rotatedIndex > innerPixelCount) {
+        let rotatedIndex = index + (innerPixelCount / 2) - 1
+        if (rotatedIndex >= innerPixelCount) {
             rotatedIndex = rotatedIndex - innerPixelCount
         }
         return rotatedIndex
@@ -63,8 +63,8 @@ export default class Original {
         const { outerPixelCount } = this.store.getState();
         const index = Math.ceil((outerPixelCount / 60) * this.date.minute())
 
-        let rotatedIndex = index + (outerPixelCount / 2)
-        if (rotatedIndex > outerPixelCount) {
+        let rotatedIndex = index + (outerPixelCount / 2) - 1
+        if (rotatedIndex >= outerPixelCount) {
             rotatedIndex = rotatedIndex - outerPixelCount
         }
 
