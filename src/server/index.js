@@ -70,7 +70,9 @@ module.exports = class Server extends HttpServer {
             let previousValue = currentValue
             currentValue = this.store.getState().pixels
             if (previousValue !== currentValue) {
-                ws.send(this.store.getState())
+                ws.send(
+                    JSON.stringify(this.store.getState())
+                )
             }
         })
 
