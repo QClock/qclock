@@ -70,7 +70,7 @@ module.exports = class Server extends HttpServer {
             let previousValue = currentValue
             currentValue = this.store.getState().pixels
             if (previousValue !== currentValue) {
-                ws.send(this.store.getState().pixels)
+                ws.send(this.store.getState())
             }
         })
 
@@ -87,8 +87,6 @@ module.exports = class Server extends HttpServer {
 
             routes.socket(this.store, data)
         })
-
-
     }
 
     __onRequest (request, response) {
