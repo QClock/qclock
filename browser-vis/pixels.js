@@ -35,24 +35,24 @@ function display (int32Array) {
 }
 
 function getRotation (p) {
-    var deg = 190;
+    var deg = 180;
 
-    if (p < 56) {
+    if (p < 58) {
         deg = deg + (p * 6.2);
     }
 
-    if (p >= 56) {
+    if (p >= 58) {
         deg = deg + ( (p - 58 + 1) * 6.4)
     }
 
     return deg
 }
 
-var p = 111;
+var p = 113;
 
 for (;p >= 0 ; p--) {
 
-    var elem = $('<div class="pixel ' + (p < 56 ? 'outer' : 'inner') + ' p--' + p + '"><span></span><em>' + p + '</em></div>');
+    var elem = $('<div class="pixel ' + (p < 58 ? 'outer' : 'inner') + ' p--' + p + '"><span></span><em>' + p + '</em></div>');
 
     elem.css({
         'transform': 'rotate(' + getRotation(p) + 'deg)'
@@ -60,7 +60,7 @@ for (;p >= 0 ; p--) {
     $('.pixels').append(elem)
 }
 
-var ws = new WebSocket('ws://127.0.0.1:8080/');
+var ws = new WebSocket('ws://192.168.0.4:8080/');
 
 ws.addEventListener('message', function (e) {
     var fileReader = new FileReader();

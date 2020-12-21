@@ -1,3 +1,4 @@
+import config from './config'
 let port = 8080
 
 export default {
@@ -32,8 +33,8 @@ export default {
 
     utcOffset: 0,
     interval: 1000,
-    outerPixelCount: 58,
-    innerPixelCount: 56,
+    outerPixelCount: config.OUTER,
+    innerPixelCount: config.INNER,
     stubPixelCount: 6,
     zeroColor: [ 0, 0, 0],
     network: {
@@ -43,5 +44,5 @@ export default {
         password: '',
         port
     },
-    pixels: new Uint32Array( 112 )
+    pixels: new Uint32Array( config.OUTER + config.INNER )
 }
