@@ -32,7 +32,7 @@ export default {
 
     utcOffset: 0,
     interval: 1000,
-    outerPixelCount: 56,
+    outerPixelCount: 58,
     innerPixelCount: 56,
     stubPixelCount: 6,
     zeroColor: [ 0, 0, 0],

@@ -19,7 +19,7 @@ export default {
     TIMEZONE_OFFSET: 2,
     HW_LAG: 0,
 
-    OUTER: 56,
+    OUTER: 58,
     INNER: 56,
 
     OUTER_COLOR: [255,0,228], // pink RGB
