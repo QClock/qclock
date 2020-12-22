@@ -1,4 +1,4 @@
-import './env'
+require('dotenv').config()
 
 import log from './log'
 import store from './store'
