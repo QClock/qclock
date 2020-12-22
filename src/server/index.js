@@ -28,8 +28,8 @@ module.exports = class Server extends HttpsServer {
 
 
         super({
-            key: fs.readFileSync('../certs/key.pem'),
-            cert: fs.readFileSync('../certs/cert.pem'),
+            key: fs.readFileSync(`${CERT_PATH}/key.pem`),
+            cert: fs.readFileSync(`${CERT_PATH}/cert.pem`),
             passphrase: process.env.CERT_PASSPHRASE  //QCLK
         })
 
