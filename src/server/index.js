@@ -1,4 +1,4 @@
-const HttpServer = require('http').Server
+const HttpsServer = require('https').Server
 const WebSocket = require('ws')
 const fs = require('fs')
 const path = require('path')
@@ -20,10 +20,18 @@ const preflight = (req, res) => {
     return res.end()
 }
 
-module.exports = class Server extends HttpServer {
+module.exports = class Server extends HttpsServer {
 
     constructor (store) {
-        super()
+
+        console.log(__dirname)
+
+
+        super({
+            key: fs.readFileSync('../certs/key.pem'),
+            cert: fs.readFileSync('../certs/cert.pem'),
+            passphrase: process.env.CERT_PASSPHRASE  //QCLK
+        })
 
         this.store = store
         this.opened = false
