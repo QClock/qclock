@@ -23,14 +23,13 @@ const preflight = (req, res) => {
 module.exports = class Server extends HttpsServer {
 
     constructor (store) {
-
-        console.log(__dirname)
-
+        const {
+            CERT_PATH
+        } = process.env;
 
         super({
-            key: fs.readFileSync(`${CERT_PATH}/key.pem`),
-            cert: fs.readFileSync(`${CERT_PATH}/cert.pem`),
-            passphrase: process.env.CERT_PASSPHRASE  //QCLK
+            key: fs.readFileSync(`${CERT_PATH}/server.key`),
+            cert: fs.readFileSync(`${CERT_PATH}/server.cert`)
         })
 
         this.store = store
