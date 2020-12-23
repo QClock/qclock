@@ -55,7 +55,5 @@ export default function hsl2rgb (h, s, l) {
 	green += lightnessAdjustment;
 	blue += lightnessAdjustment;
 
-
-
 	return [...[red, green, blue].map((comp) => Math.round(comp * 255))];
   };

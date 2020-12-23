@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 import log from './log'
 import store from './store'
 
@@ -18,7 +16,6 @@ const clockwork = new Clockwork(store)
 const time = new Time(store)
 
 
-// todo on neopixel ready
 const clockface = new Clockface(store, time, neopixels);
 
 process.on('uncaughtException', (err) => {

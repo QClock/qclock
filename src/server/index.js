@@ -105,8 +105,6 @@ module.exports = class Server extends HttpServer {
             return response.end(this.__cache[request.url])
         }
 
-
-        console.log('__onRequest', url)
         const assetRequest = /\.\w*$/.test(url.pathname)
 
         if (!assetRequest) {
@@ -120,11 +118,11 @@ module.exports = class Server extends HttpServer {
 
     __serve (err, file, assetRequest, request, response) {
         if (err) {
+            log.error(err)
             console.log(err)
             response.statusCode = 404
             return response.end('not found')
         }
-
 
         response.setHeader('Last-Modified', new Date())
         response.setHeader('Cache-Control','no-cache, no-store, must-revalidate')
