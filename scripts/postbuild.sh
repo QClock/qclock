@@ -5,4 +5,4 @@ cp package.json build/
 cp .env build/
 
 rm -rf build/web
-cp -r web/qclk/public build/web
+cp -r ui build/web

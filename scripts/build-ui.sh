@@ -15,3 +15,7 @@ fi
 
 npm i
 npm run build
+cd ../../
+rm -rf ui
+mkdir ui
+cp -r web/qclk/public ui
