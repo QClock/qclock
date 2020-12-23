@@ -18,4 +18,4 @@ npm run build
 cd ../../
 rm -rf ui
 mkdir ui
-cp -r web/qclk/public ui
+cp -r web/qclk/public/* ui
