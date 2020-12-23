@@ -37,8 +37,6 @@ module.exports = class Server extends HttpServer {
     start () {
         if (this.opened) return
 
-        const network = this.store.getState().network
-
         this.wss = new WebSocket.Server({
             server: this
         })
@@ -50,7 +48,7 @@ module.exports = class Server extends HttpServer {
             log.info(`WS listening ${address}:${port}`)
         })
 
-        this.listen(network.port, '0.0.0.0')
+        this.listen(process.env.PORT, '0.0.0.0')
         this.opened = true
     }
 
@@ -127,9 +125,6 @@ module.exports = class Server extends HttpServer {
             return response.end('not found')
         }
 
-        if (!assetRequest) {
-            file = this.injectConfig(file)
-        }
 
         response.setHeader('Last-Modified', new Date())
         response.setHeader('Cache-Control','no-cache, no-store, must-revalidate')
@@ -144,8 +139,5 @@ module.exports = class Server extends HttpServer {
         log.error(exception)
     }
 
-    injectConfig (html) {
-        return html.toString().replace(/\/\* QCLOCKCONSTANTS \*\//, `window.QCLOCK = ${JSON.stringify(this.store.getState().clientConfig)};`)
-    }
 
 }

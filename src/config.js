@@ -1,17 +1,6 @@
 const packagejson = require('./package.json')
-const port = 80
-
-if (process.env.QTEST) {
-    port = 8889
-    skip_facedandy = true
-}
 
 export default {
-
-    USE_ADMIN: true,
-    USE_NETWORK: true,
-
-    SERVER_PORT: port,
 
     INTERVAL: 1000,
 

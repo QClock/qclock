@@ -1,10 +1,9 @@
-import config from './config'
-let port = 8080
-
 export default {
 
     // clock data
 
+    outerPixelCount: 58,
+    innerPixelCount: 56,
     color: {
         hour: [ 230, 100, 50 ],
         minute: [ 130, 100, 50 ]
@@ -21,28 +20,11 @@ export default {
         useSocket: false
     },
 
-    // client config
-
-    clientConfig: {
-        API_PORT: port,
-        PUT_RATELIMIT: 0,
-        WS_PORT: 8088
-    },
-
     // internal
 
     utcOffset: 0,
     interval: 1000,
-    outerPixelCount: config.OUTER,
-    innerPixelCount: config.INNER,
     stubPixelCount: 6,
     zeroColor: [ 0, 0, 0],
-    network: {
-        websocketPort: 8088,
-        ssid: 'QCLOCK',
-        security: '',
-        password: '',
-        port
-    },
-    pixels: new Uint32Array( config.OUTER + config.INNER )
+    pixels: new Uint32Array( 58 + 56 )
 }

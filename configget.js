@@ -17,7 +17,7 @@ var callback = function (e, data) {
 
 	if (e) throw e;
 
-	data.qtime.network.mode = "client";
+
 
 	config.write(data, function (err) {
 		if (e) throw e;
